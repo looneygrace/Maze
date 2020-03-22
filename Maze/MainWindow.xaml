@@ -6,7 +6,94 @@
         xmlns:local="clr-namespace:Maze"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+  <Grid>
+
+  </Grid>
+    <Viewport3D  Name="Viewport3D1" Margin="12,41,12,12">
+      <Viewport3D.Camera>
+        <PerspectiveCamera  Position="-40,40,40" LookDirection="40,-40,-40 "
+                     UpDirection="0,0,1" />
+      </Viewport3D.Camera>
+      <ModelVisual3D >
+        <ModelVisual3D.Content>
+          <Model3DGroup >
+            <DirectionalLight Color="White"  Direction="-10,-10,-10" />
+            <GeometryModel3D>
+              <GeometryModel3D.Geometry>
+                <MeshGeometry3D Positions="0,0,0 10,0,0 10,10,0 0,10,0 0,0,10  10,0,10 10,10,10 0,10,10"
+                  TriangleIndices="0 3 1 1 3 2   0 4 3 4 7 3  4 6 7 4 5 6  0 1 4 1 5 4  1 2 6 6 5 1  2 3 7 7 6 2 "/>
+              </GeometryModel3D.Geometry>
+              <GeometryModel3D.Material>
+                <DiffuseMaterial Brush="red" AmbientColor="Yellow" Color="Yellow" />
+              </GeometryModel3D.Material>
+            </GeometryModel3D>
+          </Model3DGroup>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+      <ModelVisual3D >
+        <ModelVisual3D.Content>
+          <Model3DGroup >
+            <DirectionalLight Color="White"  Direction="-10,-10,-10" />
+            <GeometryModel3D>
+              <GeometryModel3D.Geometry>
+                <MeshGeometry3D Positions="0,-10,-10 10,-10,-10 10,0,-10 0,0,-10 0,-10,0 10,-10,0 10,0,0 0,0,0"
+              TriangleIndices="0 3 1 1 3 2   0 4 3 4 7 3  4 6 7 4 5 6  0 1 4 1 5 4  1 2 6 6 5 1  2 3 7 7 6 2 "/>
+              </GeometryModel3D.Geometry>
+              <GeometryModel3D.Material>
+                <DiffuseMaterial Brush="yellow" AmbientColor="Yellow" Color="Yellow"  />
+              </GeometryModel3D.Material>
+            </GeometryModel3D>
+          </Model3DGroup>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+      <ModelVisual3D >
+        <ModelVisual3D.Content>
+          <Model3DGroup >
+            <DirectionalLight Color="White"  Direction="-10,-10,-10" />
+            <GeometryModel3D>
+              <GeometryModel3D.Geometry>
+                <MeshGeometry3D Positions="-10,-10,0 0,-10,0 0,0,0 -10,0,0 -10,-10,10  0,-10,10 0,0,10 -10,0,10"
+             TriangleIndices="0 3 1 1 3 2   0 4 3 4 7 3  4 6 7 4 5 6  0 1 4 1 5 4  1 2 6 6 5 1  2 3 7 7 6 2 "/>
+              </GeometryModel3D.Geometry>
+              <GeometryModel3D.Material>
+                <DiffuseMaterial Brush="green" AmbientColor="white" Color="white" />
+              </GeometryModel3D.Material>
+            </GeometryModel3D>
+          </Model3DGroup>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+      <ModelVisual3D >
+        <ModelVisual3D.Content>
+
+          <Model3DGroup >
+            <DirectionalLight Color="White"  Direction="-10,-10,-10" />
+            <GeometryModel3D>
+              <GeometryModel3D.Geometry>
+                <MeshGeometry3D Positions="-10,0,-10 0,0,-10 0,10,-10 -10,10,-10 -10,0,0 0,0,0 0,10,0 -10,10,0"
+              TriangleIndices="0 3 1 1 3 2   0 4 3 4 7 3  4 6 7 4 5 6  0 1 4 1 5 4  1 2 6 6 5 1  2 3 7 7 6 2 "/>
+              </GeometryModel3D.Geometry>
+              <GeometryModel3D.Material>
+                <DiffuseMaterial Brush="blue" AmbientColor="white" Color="white" />
+              </GeometryModel3D.Material>
+            </GeometryModel3D>
+          </Model3DGroup>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+      <ModelVisual3D >
+        <ModelVisual3D.Content>
+          <Model3DGroup >
+            <DirectionalLight Color="White"  Direction="-10,-10,-10" />
+            <GeometryModel3D>
+              <GeometryModel3D.Geometry>
+                <MeshGeometry3D Positions="-40,-40,-40 40,-40,-40 40,40,-40 -40,40,-40 -40,-40,40  40,-40,40 40,40,40 -40,40,40"
+                  TriangleIndices="0 1 3 1 2 3   0 3 4 4 3 7  4 7 6 4 6 5  0 4 1 1 4 5  1 6 2 6 1 5  2 7 3 7 2 6 "/>
+              </GeometryModel3D.Geometry>
+              <GeometryModel3D.Material>
+                <DiffuseMaterial Brush="brown" AmbientColor="Yellow" Color="Yellow" />
+              </GeometryModel3D.Material>
+            </GeometryModel3D>
+          </Model3DGroup>
+        </ModelVisual3D.Content>
+      </ModelVisual3D>
+    </Viewport3D>
 </Window>
