@@ -172,7 +172,7 @@ The goal of our project is to create a maze game using WPF applications and data
 \section{Introduction}
 
 
-For Maze, we are trying to accomplish a interactive WPF application that involves databases and computer generated mazes. We are using Eller's Algorithm to create the mazes due to its ability ro create infinite sized mazes very quickly. The mass of mazes will be stored as a 2D array in a database. The maze will be seen in an isometric view where the viewer will only be able to see a portion and the screen will move with the player. 
+For Maze, we are trying to accomplish a interactive WPF application that involves databases and computer generated mazes. We are using Eller's Algorithm to create the mazes due to its ability ro create infinite sized mazes very quickly. The mass of mazes will be stored as a 2d array in a database. The maze will be seen in an isometric view where the viewer will only be able to see a portion and the screen will move with the player. 
 
 Maze is intended for people who enjoy puzzle games. It offers a simple distraction to the constant boredom most humans suffer from.  We hope our audience will achieve a sense of fullfiillment out of our game because they solved a maze or multiple mazes. 
 
@@ -193,6 +193,8 @@ Our project is done when we have a 'perfect' 'orthogonal' maze application with 
 \item Timed: The user can see how long it took them to complete that maze.
 \item Scored: The user can earn points by collecting items across the maze.
 \item Music: The user can have music while completing the maze.
+\item Secret Buttons: The user can access special items or areas when standing on secret button
+
 \end{itemize}
 
 
@@ -201,15 +203,16 @@ As part of fleshing out the scope of your requirements, you'll also need to keep
 
 \subsubsection{Functional}
 \begin{itemize}
-\item User needs to have a private shopping cart -- this cannot be shared between users, and needs to maintain state across subsequent visits to the site
-\item Users need to have website accounts -- this will help track recent purchases, keep shopping cart records, etc.
-\item You'll need more than 2 of these...
+\item User needs to be able to interact with the maze
+\item Application needs to be able to save 3 games
+\item Application needs to be able to load any of the three saved games
+\item Application will record high scores
 \end{itemize}
 
 \subsubsection{Non-Functional}
 \begin{itemize}
-\item Security -- user credentials must be encrypted on disk, users should be able to reset their passwords if forgotten
-\item you'll typically have fewer non-functional than functional requirements
+\item Perfomance- Application will create mazes in a short amount of time
+\item Scalability - Application will create mazes of differnent sizes
 \end{itemize}
 
 \subsection{Use Cases}
@@ -226,93 +229,237 @@ You should have a table listing all use cases discussed in the document, the ID 
 \hline
 Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \hline \hline
-1 & Add item to cart & Shopper & Med & 1\\
-\hline
-2 & Checkout & Shopper & Med & 1\\
+1 & Start New Game & Gamer & Med & 1\\
+2 & Customize Maze & Gamer & Med & 2\\
+3 & Save Game & Gamer & Med & 3\\
+4 & Load Game & Gamer & Med  &3\\
+5 & Calculate High Scores & Computer & Med & 3\\
+6 & Play Game & Gamer & Hard & 1\\
+7 & View Credits & Gamer & Easy & 4\\
 \hline
 
 \end{tabular}
-\caption{Sample use case table}
+\caption{Use case table}
 \label{tab:useCaseIndex}
 \end{table}
 
 
 \begin{itemize}
 \item[Use Case Number:] 1
-\item[Use Case Name:] Add item to cart
-\item[Description:] A shopper on our site has identified an item they wish to buy.  They will click on a ``Add to Cart" button.  This will kick off a process to add one instance of the item to their cart.
+\item[Use Case Name:] Start New Game 
+\item[Description:] The gamer on our WPF application wants to play a new game. They will click the "New Game" Button, and this will start the off the Eller's algorithm to create a new maze. In addition, the maze will display after algorithm is completed. 
+\item[Preconditons:]
+\begin{itemize} 
+\item Maze is downloaded
+\item Maze has been opened
 \end{itemize}
 
-You will then go on to (minimally) discuss a basic flow for the process:
+\item[Postconditons:]
+\begin{itemize} 
+\item New game will be started
+\end{itemize}
+\item[Invariants:]
+\begin{itemize} 
+\item New game function is working properly
+\item Game runs as it is meant to
+\end{itemize}
+\end{itemize}
+
 
 \begin{enumerate}
-\item User navigates to page listing desired item
-\item User left-clicks on ``Add to Cart" button.
-\item User cart is updated to reflect the new item, this also updates the current total.
-\item[Termination Outcome:] The user now has a single instance of the item in their cart.
+\item Select New Game from the main menu
+\item Play game
 \end{enumerate}
-
-You may need to also add in any alternative flows:
-
-Alternative: Item already exists in the cart
-\begin{enumerate}
-\item User navigates to page listing desired item
-\item User left-clicks on ``Add to Cart" button.
-\item User cart is updated to reflect the new item, showing that one more instance of the existing item has been added.  This also updates the current total.
-\item[Termination Outcome:] The user now has multiple instances of the item in their cart.
-\end{enumerate}
-
-You will often also need to include pictures or diagrams.  It is quite common to see use-case diagrams in such write-ups.  To properly reference an image, you will need to use the \texttt{figure} environment and will need to reference it in your text (via the \texttt{ref} command) (see Figure \ref{cat1}).  NOTE: this is not a use case diagram, but a kitten.
-
-After fully describing a use case, it is time to move on to the next use case:
 
 \begin{itemize}
 \item[Use Case Number:] 2
-\item[Use Case Name:] Checkout
-\item[Description:] A shopper on our site has finished shopping.  They will click on a ``Checkout" button.  This will kick off a process to calculate cart total, any taxes, shipping rates, and collect payment from the shopper.
+\item[Use Case Name:] Customize Maze
+\item[Description:] The gamer on our WPF application wants to edit their maze appearence or the sounds of the maze. The gamer clicks the "Settings" button. This will take the gamer to the settings menu, so they can customize the maze appearence.
+
+\item[Preconditons:]
+\begin{itemize} 
+\item Maze is downloaded
+\item Maze has been opened
+\end{itemize}
+
+\item[Postconditons:]
+\begin{itemize} 
+\item Current maze theme will be updated
+\end{itemize}
+\item[Invariants:]
+\begin{itemize} 
+\item Theme function is working properly
+\item Music function is working properly
+\item Customize function is working properly
 
 \end{itemize}
+\end{itemize}
+
+
+\begin{enumerate}
+\item Select settings from home screen
+\item If desired theme already exists, then select it from the Theme menu
+\item If desired theme does not exist, then move to the Customize menu
+\item Select desired color for maze walls
+\item Select desired color for maze floor
+\item Select desired music setting from the Music menu
+\item Save maze settings
+
+
+\end{enumerate}
+\begin{itemize}
+\item[Use Case Number:] 3
+\item[Use Case Name:] Save Game
+\item[Description:] The gamer on our WPF application wants to save their unfinished maze. The gamer selects in the "save" button from the game view. They will be able to select one of the save spaces to save their maze to that memory spot.
+\item[Preconditons:]
+\begin{itemize} 
+\item Maze is downloaded
+\item Maze has been opened
+\end{itemize}
+
+\item[Postconditons:]
+\begin{itemize} 
+\item Current game is saved in desired save slot
+\end{itemize}
+\item[Invariants:]
+\begin{itemize} 
+\item Pause function is working properly
+\item Save function is working properly
+\end{itemize}
+\end{itemize}
+
+
+\begin{enumerate}
+\item Click pause button
+\item Click save button
+\item Select a save slot
+\item If save slot is currently being used, then decide whether or not to overwrite the previous save
+\item Return to pause menu
+\item End current game
+
+\end{enumerate}
 
 You will then need to continue to flesh out all use cases you have identified for your project.
 
-\begin{figure}[ht!]
-\includegraphics[height=250px, width=350px]{cat1.jpg}
-\caption{First picture, this is a kitten, not a use case diagram}
-\label{cat1}
-\end{figure}
-
 \subsection{Interface Mockups}
-At first, this will largely be completely made up, as you get further along in your project, and closer to a final product, this will typically become simple screenshots of your running application.
 
-In this subsection, you will be showing what the screen should look like as the user moves through various use cases (make sure to tie the interface mockups back to the specific use cases they illustrate).
-
-
-
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-Menu.png}
+\caption{This is the Menu}
+\label{Menu}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-BeginMaze.png}
+\caption{This is the screen where the "New Button" transports the user}
+\label{Start of Maze}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-Load.png}
+\caption{This is the Load Screen that will appear after they select the button "Load Game"}
+\label{Load Screen}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-Finish.png}
+\caption{This is the screen that will be shown after the Maze game has finished}
+\label{Finish Screen}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-Customize.png}
+\caption{This is the Customize Menu}
+\label{Customize Menu}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-HighScores.png}
+\caption{This is the High Score Screen}
+\label{High Scores}
+\end{figure}
+\begin{figure}[ht!]
+\includegraphics[height=150px, width=250px]{Interface-Credits.png}
+\caption{This is the Credits}
+\label{Credits}
+\end{figure}
+\clearpage
 \section{Project Timeline}
-Go back to your notes and look up a typical project development life cycle for the Waterfall approach.  How will you follow this life cycle over the remainder of this semester?  This will usually involve a chart showing your proposed timeline, with specific milestones plotted out.  Make sure you have deliverable dates from the course schedule listed, with a plan to meet them (NOTE: these are generally optimistic deadlines).
+
+Maze Game Timeline: (refer to Table 2 for a more detailed schedule)
+\begin{enumerate}
+\item Requirements: January 20 - February 27
+\item Design: February 28 – March 31
+\item Implementation: April 1 – April 20
+\item Verification: April 21 – April 26
+\item Maintenance: April 26 - onward
+\end{enumerate}
+Explanation: 
+\begin{itemize} 
+\item Requirements
+\begin{itemize}
+\item Teams formed. Began planning what we wanted the game to do and look like. Decided what features we need/want to implement.
+\end{itemize}
+\item Design
+\begin{itemize}
+\item Planned out the programming structure of the maze game. Selected the Singleton and Observer design patterns to use in implementation of the game.
+\end{itemize}
+\item Implementation
+\begin{itemize}
+\item Full scale implementation of designs.
+\begin{enumerate}
+\item April 1 – April 7: Begin implementation of the main menu as well as the mazes themselves. Focus on completing the new game and load game options. If new game and load game are completed, begin implementing the high score page and settings menu.
+\item April 8 – April 14: Continue implementation of the mazes and finish implementing the high score page and settings menu if they are not yet complete.
+\item April 15 – April 20: Finish implementation of the mazes. Begin working on stretch goals (timer, music, secret buttons, hidden objects) if enough work is completed on the mazes.
+\end{enumerate}
+\end{itemize}
+\item Verification
+\begin{itemize}
+\item Maze should be completed at this stage. Prepare for the final presentation on April 26.
+\end{itemize}
+\item Maintenance
+\begin{itemize}
+\item Review goals that were and were not accomplished. Discuss new features that may be implemented in the future.
+\end{itemize}
+\end{itemize} 
+
 \begin{table}
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
  Activity & Start & End & Notes & Priority \\
 \hline \hline
-Requirements: Team Formed & 1/9/2020 & 1/11/2020 & A team of two exists and they tolerate each other & 1\\
-\hline
-Requirements: Project Idea & 1/10/2020 & 1/15/2020 & Both members agree upon an idea & 1\\
-\hline
-Requirements: Purpose & 1/21/2020 & 1/15/2020 & Both members agree upon the purpose of the project & 1\\
-\hline
-Requirements: Features & 1/21/2020 & 1/15/2020 & Both members agree upon an what features to include& 1\\
-\hline
-Requirements: Use Cases & 2/11/2020 & 1/15/2020 & The use cases are listed in the latex file & 1\\
-\hline
-Requirements: Non-functional and functional & 2/11/2020 & 1/15/2020 & The requirements are listed in the latex file & 2\\
+Requirements: \\
+\hline \hline
+Team Formed & 1/9/2020 & 1/11/2020 & A team of two exists and they tolerate each other & 1\\
+Project Idea & 1/10/2020 & 1/15/2020 & Both members agree upon an idea & 1\\
+Purpose & 1/21/2020 & 1/15/2020 & Both members agree upon the purpose of the project & 1\\
+Features & 1/21/2020 & 1/15/2020 & Both members agree upon an what features to include& 1\\
+Use Cases & 2/11/2020 & 1/15/2020 & The use cases are listed in the latex file & 1\\
+Non-functional and functional & 2/11/2020 & 1/15/2020 & The requirements are listed in the latex file & 2\\
+Interface Mockup & 2/11/2020 & 2/21/2020 & The mockup slides are added to the Latex file & 2\\
+\hline \hline
+Design: \\
+\hline \hline 
+Timeline & 2/26/2020 & 2/27/2020 & The timeline is added to the latex file & 2\\
+UML Outline & 2/28/2020 & 3/31/2020 & The outline is added to the latex file & 2\\
+Researched Design Patterns& 2/27/2020& 3/31/2020 & The team reasearches possible design patterns to implement & 3\\
+Researched Implementation Ideas & 2/29/2020& 3/31/2020 & The team reasearches possible ways to implement project & 3\\
+Updated Latex File& 3/31/2020 & 3/31/2020 & The team updates the Latex file with the changes&2\\
+\hline \hline
+Implementation: \\
+\hline \hline 
+Main Menu &4/1/2020& 4/8/2020& Main menu implementation should be complete& 2\\
+Maze&4/1/2020 & 4/14/2020 & Maze implementation should be complete& 1\\
+High Score& 4/8/2020&4/16/2020& High score implementation should be complete& 2\\
+Settings&4/1/2020& 4/14/2020& settings menu implementation should be complete& 2\\
+Stretch Goals& 4/15/2020&4/21/2020& Stretch goals should implementation should be attempted & 3\\
+\hline \hline
+Verification: \\
+\hline \hline 
+Testing & 4/15/2020&4/20/2020&Test project&1\\
+Preparation for Presentation & 4/20/2020&4/20/2020& Prepare&1\\
 \hline
 \end{tabular}
 \caption{Timeline Table}
 \label{tab:timeline}
 \end{table}
-
+\clearpage
 \section{Project Structure}
 At first, this will be a little empty (it will need to be filled in by the time you turn in your final report).  This is your chance to discuss all of your design decisions (consider this the README's big brother).
 
@@ -327,7 +474,10 @@ Show the full structure of your program.  Make sure to keep on updating this sec
 
 
 \subsection{Design Patterns Used}
-Make sure to actually use at least 2 design patterns from this class.  This is not normally part of such documentation, but largely just specific to this class -- I want to see you use the patterns!
+\begin{enumerate}
+\item Singleton
+\item Factory
+\end{enumerate}
 
 
 \section{Results}
