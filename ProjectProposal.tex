@@ -344,37 +344,37 @@ You will then need to continue to flesh out all use cases you have identified fo
 \subsection{Interface Mockups}
 
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-Menu.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-Menu.png}
 \caption{This is the Menu}
 \label{Menu}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-BeginMaze.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-BeginMaze.png}
 \caption{This is the screen where the "New Button" transports the user}
 \label{Start of Maze}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-Load.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-Load.png}
 \caption{This is the Load Screen that will appear after they select the button "Load Game"}
 \label{Load Screen}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-Finish.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-Finish.png}
 \caption{This is the screen that will be shown after the Maze game has finished}
 \label{Finish Screen}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-Customize.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-Customize.png}
 \caption{This is the Customize Menu}
 \label{Customize Menu}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-HighScores.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-HighScores.png}
 \caption{This is the High Score Screen}
 \label{High Scores}
 \end{figure}
 \begin{figure}[ht!]
-\includegraphics[height=150px, width=250px]{Interface-Credits.png}
+\includegraphics[height=150px, width=250px]{interface/Interface-Credits.png}
 \caption{This is the Credits}
 \label{Credits}
 \end{figure}
@@ -420,7 +420,7 @@ Explanation:
 
 \begin{table}
 \centering
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
  Activity & Start & End & Notes & Priority \\
 \hline \hline
@@ -464,15 +464,17 @@ Preparation for Presentation & 4/20/2020&4/20/2020& Prepare&1\\
 At first, this will be a little empty (it will need to be filled in by the time you turn in your final report).  This is your chance to discuss all of your design decisions (consider this the README's big brother).
 
 \subsection{UML Outline}
-Show the full structure of your program.  Make sure to keep on updating this section as your project evolves (you often start out with one plan, but end up modifying things as you move along).  As a note, while Dia fails miserably at generating pdfs (probably my fault), I have had much success with png files.  Make sure to wrap your images in a \texttt{figure} environment, and to reference with the \texttt{ref} command.  For example, see Figure \ref{cat2}.
-
 \begin{figure}[ht!]
-\includegraphics[scale=1.5]{cat2.jpg}
-\caption{Your figures should be in the \emph{figure} environment, and have captions.  Should also be of diagrams pertaining to your project, not random internet kittens}
-\label{cat2}
+\includegraphics[scale=.5]{patterns/Observer.png}
+\caption{How we will update the GUI}
+\label{Game play}
 \end{figure}
-
-
+\begin{figure}[ht!]
+\includegraphics[scale=.5]{patterns/Singleton.png}
+\caption{How we will handle the three instances of the maze}
+\label{Maze instance}
+\end{figure}
+\clearpage
 \subsection{Design Patterns Used}
 \begin{enumerate}
 \item Singleton
