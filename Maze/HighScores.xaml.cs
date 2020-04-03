@@ -15,20 +15,13 @@ using System.Windows.Shapes;
 namespace Maze
 {
     /// <summary>
-    /// Interaction logic for Settings.xaml
+    /// Interaction logic for HighScores.xaml
     /// </summary>
-    public partial class Settings : Window
+    public partial class HighScores : Window
     {
-        public Settings()
+        public HighScores()
         {
             InitializeComponent();
-        }
-
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            var Main = new MainWindow();
-            Main.Show();
-            this.Close();
         }
     }
 }

@@ -20,9 +20,45 @@ namespace Maze
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void New_Game_Click(object sender, RoutedEventArgs e)
+        {
+            var NewGame = new NewGame();
+            NewGame.Show();
+            this.Close();
+        }
+
+        private void Load_Game_Click(object sender, RoutedEventArgs e)
+        {
+            var LoadGame = new LoadGame();
+            LoadGame.Show();
+            this.Close();
+        }
+
+        private void High_Scores_Click(object sender, RoutedEventArgs e)
+        {
+            var HighScores = new HighScores();
+            HighScores.Show();
+            this.Close();
+        }
+
+        private void Credits_Click(object sender, RoutedEventArgs e)
+        {
+            var Credits = new Credits();
+            Credits.Show();
+            this.Close();
+        }
+
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            var Settings = new Settings();
+            Settings.Show();
+            this.Close();
         }
     }
 }

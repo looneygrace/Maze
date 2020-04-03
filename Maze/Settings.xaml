@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="258,94,0,0"/>
+        <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click"/>
         <ListBox HorizontalAlignment="Left" Height="105" Margin="61,54,0,0" VerticalAlignment="Top" Width="177">
             <CheckBox Content="Creepy Dungeon" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Bush" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -20,5 +20,6 @@
             <CheckBox Content="Garden Music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="No music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ListBox>
+        <TextBox HorizontalAlignment="Left" Height="55" Margin="445,104,0,0" TextWrapping="Wrap" Text="Type Here" VerticalAlignment="Top" Width="116" Name="Red" MaxLength="3"/>
     </Grid>
 </Window>
