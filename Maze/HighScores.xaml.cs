@@ -11,7 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Xml.Serialization;
 namespace Maze
 {
     /// <summary>
@@ -19,9 +21,33 @@ namespace Maze
     /// </summary>
     public partial class HighScores : Window
     {
+        public string PlayerName { get; set; }
+
+        public int Score { get; set; }
+        //public DateTime {get; set;}
         public HighScores()
         {
             InitializeComponent();
+            gameTickTimer.Tick += GameTickTimer_Tick;
+            LoadHighscoreList();
+        }
+        public ObservableCollection<HighScores> HighscoreList
+        {
+            get; set;
+        } = new ObservableCollection<HighScores>();
+        private void LoadHighscoreList()
+        {
+            if (File.Exists("snake_highscorelist.xml"))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<SnakeHighscore>));
+                using (Stream reader = new FileStream("snake_highscorelist.xml", FileMode.Open))
+                {
+                    List<SnakeHighscore> tempList = (List<SnakeHighscore>)serializer.Deserialize(reader);
+                    this.HighscoreList.Clear();
+                    foreach (var item in tempList.OrderByDescending(x => x.Score))
+                        this.HighscoreList.Add(item);
+                }
+            }
         }
     }
 }

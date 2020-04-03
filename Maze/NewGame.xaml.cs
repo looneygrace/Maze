@@ -22,6 +22,7 @@ namespace Maze
     /// </summary>
     public partial class NewGame : Window, INotifyPropertyChanged
     {
+        Game currentGame;
         public NewGame()
         {
             InitializeComponent();
@@ -30,7 +31,7 @@ namespace Maze
             this._timer = new Timer(
                 new TimerCallback((s) => this.FirePropertyChanged(this, new PropertyChangedEventArgs("Stopwatch"))),
                 null, 1000, 1000);
-            Game n = new Game();
+            currentGame = new Game();
         }
         private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -56,6 +57,26 @@ namespace Maze
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+        private void EndGame()
+        {
+            bool isNewHighscore = false;
+            if (currentGame.Score > 0)
+            {
+                int lowestHighscore = (this.HighscoreList.Count > 0 ? this.HighscoreList.Min(x => x.Score) : 0);
+                if ((currentScore > lowestHighscore) || (this.HighscoreList.Count < MaxHighscoreListEntryCount))
+                {
+                    bdrNewHighscore.Visibility = Visibility.Visible;
+                    txtPlayerName.Focus();
+                    isNewHighscore = true;
+                }
+            }
+            if (!isNewHighscore)
+            {
+                tbFinalScore.Text = currentScore.ToString();
+                bdrEndOfGame.Visibility = Visibility.Visible;
+            }
+            gameTickTimer.IsEnabled = false;
         }
     }
 }
