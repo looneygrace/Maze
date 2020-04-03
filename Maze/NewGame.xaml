@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Maze"
         mc:Ignorable="d"
-        Title="NewGame" Height="450" Width="800">
+        Title="NewGame" Height="450" Width="800" >
     <Grid>
         
+        <Button Content="Exit" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray" BorderThickness="1" FontSize ="15" Height="25" Width="75" Margin="50,25,0,0" Click="Exit_Click"/>
+        <Button Content="Pause" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray" BorderThickness="1" FontSize ="15" Height="25" Width="75"  Margin="150,25,0,0" Click="Pause_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightGray" BorderThickness="1" FontSize ="15" Height="25" Width="75" Margin="250,25,0,0" Click="Save_Click"/>
+        <Border Margin="350,25,0,0"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Height="25" 
+                Width="150"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"  >
+            <TextBlock Text="{Binding Path=Stopwatch.Elapsed, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  Background="LightGray" FontSize ="15" TextAlignment="Center"  />
+        </Border>
+        <Border Margin="525,25,0,0"
+                BorderThickness="1"
+                BorderBrush="Black"
+                Height="25" 
+                Width="150"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top"  >
+            <TextBlock Text="{Binding Path=n.score, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  Background="LightGray" FontSize ="15" TextAlignment="Center"  />
+        </Border>
     </Grid>
 </Window>
