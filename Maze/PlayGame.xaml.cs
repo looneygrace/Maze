@@ -26,8 +26,8 @@ namespace Maze
         Game n;
         public PlayGame() { 
         
-
-            n.makeMaze();
+            //if maze is new make new 
+            //if maze is old make old
             InitializeComponent();
             this.Stopwatch = new Stopwatch();
             this.Stopwatch.Start();
@@ -51,28 +51,6 @@ namespace Maze
         public event PropertyChangedEventHandler PropertyChanged;
         private int Xmin, Ymin, CellWid, CellHgt;
 
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            // Figure out the drawing geometry.
-            int wid = int.Parse(txtWidth.Text);
-            int hgt = int.Parse(txtHeight.Text);
-
-            CellWid = picMaze.ClientSize.Width / (wid + 2);
-            CellHgt = picMaze.ClientSize.Height / (hgt + 2);
-            if (CellWid > CellHgt) CellWid = CellHgt;
-            else CellHgt = CellWid;
-            Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
-            Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
-
-            // Build the maze nodes.
-            MazeNode[,] nodes = MakeNodes(wid, hgt);
-
-            // Build the spanning tree.
-            FindSpanningTree(nodes[0, 0]);
-
-            // Display the maze.
-            DisplayMaze(nodes);
-        }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
 
