@@ -15,22 +15,24 @@ using System.Diagnostics;
 using System.Threading;
 using System.ComponentModel;
 //Timer code was adapted from https://stackoverflow.com/questions/8302590/running-stopwatch-in-textblock
+
 namespace Maze
 {
     /// <summary>
-    /// Interaction logic for NewGame.xaml
+    /// Interaction logic for PlayGame.xaml
     /// </summary>
-    public partial class NewGame : Window, INotifyPropertyChanged
+    public partial class PlayGame : Window
     {
-        public NewGame()
+        public PlayGame(Game n)
         {
+            n.makeMaze();
             InitializeComponent();
             this.Stopwatch = new Stopwatch();
             this.Stopwatch.Start();
             this._timer = new Timer(
                 new TimerCallback((s) => this.FirePropertyChanged(this, new PropertyChangedEventArgs("Stopwatch"))),
                 null, 1000, 1000);
-            Game n = new Game();
+            
         }
         private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -45,6 +47,30 @@ namespace Maze
         public Stopwatch Stopwatch { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private int Xmin, Ymin, CellWid, CellHgt;
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            // Figure out the drawing geometry.
+            int wid = int.Parse(txtWidth.Text);
+            int hgt = int.Parse(txtHeight.Text);
+
+            CellWid = picMaze.ClientSize.Width / (wid + 2);
+            CellHgt = picMaze.ClientSize.Height / (hgt + 2);
+            if (CellWid > CellHgt) CellWid = CellHgt;
+            else CellHgt = CellWid;
+            Xmin = (picMaze.ClientSize.Width - wid * CellWid) / 2;
+            Ymin = (picMaze.ClientSize.Height - hgt * CellHgt) / 2;
+
+            // Build the maze nodes.
+            MazeNode[,] nodes = MakeNodes(wid, hgt);
+
+            // Build the spanning tree.
+            FindSpanningTree(nodes[0, 0]);
+
+            // Display the maze.
+            DisplayMaze(nodes);
+        }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
 

@@ -28,14 +28,14 @@ namespace Maze
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-            var NewGame = new NewGame();
+            var NewGame = new PlayGame();
             NewGame.Show();
             this.Close();
         }
 
         private void Load_Game_Click(object sender, RoutedEventArgs e)
         {
-            var LoadGame = new LoadGame();
+            var LoadGame = new PlayGame();
             LoadGame.Show();
             this.Close();
         }
