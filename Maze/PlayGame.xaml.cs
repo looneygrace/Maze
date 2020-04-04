@@ -23,8 +23,10 @@ namespace Maze
     /// </summary>
     public partial class PlayGame : Window
     {
-        public PlayGame(Game n)
-        {
+        Game n;
+        public PlayGame() { 
+        
+
             n.makeMaze();
             InitializeComponent();
             this.Stopwatch = new Stopwatch();
