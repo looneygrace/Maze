@@ -20,6 +20,11 @@
             <CheckBox Content="Garden Music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="No music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ListBox>
-        <TextBox HorizontalAlignment="Left" Height="55" Margin="445,104,0,0" TextWrapping="Wrap" Text="Type Here" VerticalAlignment="Top" Width="116" Name="Red" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="55" Margin="414,104,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Red" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="55" Margin="548,104,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Green" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="55" Margin="684,104,-6.4,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Blue" MaxLength="3"/>
+        <Slider HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,177,0,0"/>
+        <Rectangle Fill="#FFF4F4F5" Name ="ColorBox"  HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+
     </Grid>
 </Window>
