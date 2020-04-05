@@ -8,23 +8,26 @@
         Title="Settings" Height="450" Width="800">
     <Grid>
         <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click"/>
-        <ListBox HorizontalAlignment="Left" Height="105" Margin="61,54,0,0" VerticalAlignment="Top" Width="177">
+        <ListBox HorizontalAlignment="Left" Height="105" Margin="50,50,0,0" VerticalAlignment="Top" Width="177">
             <CheckBox Content="Creepy Dungeon" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Bush" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Stone" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Brick" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ListBox>
-        <ListBox HorizontalAlignment="Left" Height="124" Margin="68,177,0,0" VerticalAlignment="Top" Width="170">
+        <ListBox HorizontalAlignment="Left" Height="124" Margin="50,200,0,0" VerticalAlignment="Top" Width="170">
             <CheckBox Content="Creepy Music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Happy Music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="Garden Music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
             <CheckBox Content="No music" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </ListBox>
-        <TextBox HorizontalAlignment="Left" Height="55" Margin="414,104,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Red" MaxLength="3"/>
-        <TextBox HorizontalAlignment="Left" Height="55" Margin="548,104,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Green" MaxLength="3"/>
-        <TextBox HorizontalAlignment="Left" Height="55" Margin="684,104,-6.4,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="116" Name="Blue" MaxLength="3"/>
-        <Slider HorizontalAlignment="Left" VerticalAlignment="Top" Margin="445,177,0,0"/>
-        <Rectangle Fill="#FFF4F4F5" Name ="ColorBox"  HorizontalAlignment="Left" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="400,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="Red" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="500,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="Green" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="600,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="Blue" MaxLength="3"/>
+        <Rectangle Fill="#FFF4F4F5" Name ="ColorBox"  HorizontalAlignment="Left" Height="76" Stroke="Black" VerticalAlignment="Top" Width="250" Margin="400,79,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="400,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="Red_Copy" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="500,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="Green_Copy" MaxLength="3"/>
+        <TextBox HorizontalAlignment="Left" Height="16" Margin="600,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="Blue_Copy" MaxLength="3"/>
+        <Rectangle Fill="#FFF4F4F5" x:Name ="ColorBox_Copy"  HorizontalAlignment="Left" Height="76" Stroke="Black" VerticalAlignment="Top" Width="250" Margin="400,230,0,0"/>
 
     </Grid>
 </Window>
