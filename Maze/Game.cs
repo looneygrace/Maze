@@ -14,24 +14,47 @@ namespace Maze
         int score;
 
         int[,] maze;
-        int positionHeight;
-        int mazeWidth;
-        int mazeHeight;
+        int positionHeight, positionWidth;
+        int mazeWidth, mazeHeight;
         string fileName;
-        public void Initialize(int w, int h)
-        {
-            maze = new int[w, h];
-            for(int i =0; i < w; i++)
+        public Game(int w, int h, string file)
+        {            
+            if(fileName == "1" || fileName == "2" || fileName == "3")
             {
-                maze[i, 0] = i + 1;
+                //open saved maze
+                fileName = file;
+                mazeWidth = w;
+                mazeHeight = h;
+                makeMaze(true);
+                displayMaze();
+            }
+            else if (fileName == "none")
+            {
+                //make new maze
+                
+                fileName = file;
+                mazeWidth = w;
+                mazeHeight = h;
+
+                Initialize(0);
+                makeMaze(false);
+                displayMaze();
+
             }
         }
-        public void makeMaze(int exists)
+        public void Initialize(int r)
         {
-            //pass in a number 
-            //if number is b/w 1-3, a maze exists and call the file that holds the maze
-            //if number is 0, then maze doesn't exist we create a new maze
-            if(exists == 0)
+            
+            for(int i =0; i < mazeWidth; i++)
+            {
+                maze[i, r] = i + 1;
+            }
+        }
+        private void makeMaze(bool exists)
+        {
+            //if true, a maze exists and call the file that holds the maze
+            //if false, then maze doesn't exist we create a new maze
+            if(exists == false)
             {
                 makeNewMaze();
             }
@@ -40,8 +63,10 @@ namespace Maze
                 makeOldMaze();
             }
         }
-        public void makeNewMaze()
+        private void makeNewMaze()
         {
+            //TODO: Assign a start position
+            positionWidth = 0;
             //randomly choose wall to merge
             //when merging change number to lowest
 

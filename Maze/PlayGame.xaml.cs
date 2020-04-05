@@ -24,9 +24,12 @@ namespace Maze
     public partial class PlayGame : Window
     {
         Game n;
-        public PlayGame() { 
-        
-            //if maze is new make new 
+        bool isNewGame;
+        string file;
+        int w = 10;
+        int h = 10;
+        public PlayGame(bool isNew) {
+            n = new Game(w, h, file);
             //if maze is old make old
             InitializeComponent();
             this.Stopwatch = new Stopwatch();
