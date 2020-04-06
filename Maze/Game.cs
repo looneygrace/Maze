@@ -11,7 +11,7 @@ namespace Maze
     class Game
     {
 
-        int score;
+        private int score;
 
         int[,] maze;
         int positionHeight, positionWidth;
@@ -35,7 +35,7 @@ namespace Maze
                 fileName = file;
                 mazeWidth = w;
                 mazeHeight = h;
-
+                setScore(0);
                 Initialize(0);
                 makeMaze(false);
                 displayMaze();
@@ -105,6 +105,7 @@ namespace Maze
             //file syntax
             //Width
             //Length
+            //score
                 // 1 1 1 1 5 5 
                 // 1 1 1 5 1 1
             //Source for reading in https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
@@ -112,8 +113,10 @@ namespace Maze
             {
                 int w = 0;
                 int h = 0;
+                
                 mazeWidth = int.Parse(file.ReadLine());
                 mazeHeight = int.Parse(file.ReadLine());
+                score = int.Parse(file.ReadLine());
                 maze = new int[mazeWidth, mazeHeight];
 
                 for(h = 0; h <mazeHeight;h++)
@@ -130,6 +133,10 @@ namespace Maze
         public void displayMaze()
         {
             Console.WriteLine("Maze is working");
+        }
+        private void setScore(int s)
+        {
+            score = s;
         }
     }
     

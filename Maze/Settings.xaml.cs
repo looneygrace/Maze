@@ -19,56 +19,101 @@ namespace Maze
     /// </summary>
     public partial class Settings : Window
     {
+        TextBoxColor wall;
+        TextBoxColor floor;
+
         public Settings()
         {
+
             InitializeComponent();
+            wall = new TextBoxColor();
+            floor = new TextBoxColor();
 
-            ColorBox.Fill = bConverter();
+
+            WallColor.Fill = wall.bConverter(RedWall.Text, BlueWall.Text, GreenWall.Text);
+            
+            FloorColor.Fill = floor.bConverter(RedFloor.Text,BlueFloor.Text, GreenFloor.Text);
+
         }
 
-        public Brush bConverter()
+        private void Floor_TextChanged(object sender, EventArgs e)
         {
-            string r = Red.Text;
-            string b = Blue.Text;
-            string g = Green.Text;
-
-            int redInt = int.Parse(r);
-            int greenInt = int.Parse(g);
-            int blueInt = int.Parse(b);
-            if(redInt >= 255)
-            {
-                redInt = 255;
-                Red.Text = "255";
-            }
-            if (blueInt >= 255)
-            {
-                blueInt = 255;
-                Blue.Text = "255";
-            }
-            if (greenInt >= 255)
-            {
-               greenInt = 255;
-               Green.Text = "255";
-            }
-            if(redInt <= 0)
-            {
-                redInt = 0;
-                Red.Text = "0";
-            }
-            byte red = Convert.ToByte(redInt);
-            byte blue = Convert.ToByte(redInt);
-            byte green = Convert.ToByte(redInt);
-
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Color.FromRgb(red, green, blue);
-            return brush;
-        }
-
+            RedFloor.Text = 
+}
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             var Main = new MainWindow();
             Main.Show();
             this.Close();
         }
+        pub
+
     }
+    public partial class TextBoxColor : Settings
+    {
+        int red;
+        int blue;
+        int green;
+        public TextBoxColor()
+        {
+            red = 0;
+            blue = 0;
+            green = 0;
+        }
+        public void updateColors(string r, string b, string g)
+        {
+            int redInt = int.Parse(r);
+            int greenInt = int.Parse(g);
+            int blueInt = int.Parse(b);
+            //Red handler
+            if (redInt >= 255)
+            {
+                redInt = 255;
+            }
+            else if (redInt <= 0)
+            {
+                red = 0;
+            }
+            else
+            {
+                red = redInt;
+            }
+            if (blueInt >= 255)
+            {
+                blue = 255;
+            }
+            else if (blueInt <= 0)
+            {
+                blue = 0;
+            }
+            else
+            {
+                blue = blueInt;
+            }
+            if (greenInt >= 255)
+            {
+                green = 255;
+            }
+            
+           
+
+        }
+        public Brush bConverter(string r, string b, string g)
+        {
+
+            string r = Red.Text;
+            string b = Blue.Text;
+            string g = Green.Text;
+
+
+            byte red = Convert.ToByte(w.Red);
+            byte blue = Convert.ToByte(w.Blue);
+            byte green = Convert.ToByte(w.Green);
+
+            SolidColorBrush brush = new SolidColorBrush();
+            brush.Color = Color.FromRgb(red, green, blue);
+            return brush;
+        }
+    }
+    
 }
