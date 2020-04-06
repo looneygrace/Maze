@@ -15,22 +15,29 @@ using System.Diagnostics;
 using System.Threading;
 using System.ComponentModel;
 //Timer code was adapted from https://stackoverflow.com/questions/8302590/running-stopwatch-in-textblock
+
 namespace Maze
 {
     /// <summary>
-    /// Interaction logic for NewGame.xaml
+    /// Interaction logic for PlayGame.xaml
     /// </summary>
-    public partial class NewGame : Window, INotifyPropertyChanged
+    public partial class PlayGame : Window
     {
-        public NewGame()
-        {
+        Game n;
+        bool isNewGame;
+        string file;
+        int w = 10;
+        int h = 10;
+        public PlayGame(bool isNew) {
+            n = new Game(w, h, file);
+            //if maze is old make old
             InitializeComponent();
             this.Stopwatch = new Stopwatch();
             this.Stopwatch.Start();
             this._timer = new Timer(
                 new TimerCallback((s) => this.FirePropertyChanged(this, new PropertyChangedEventArgs("Stopwatch"))),
                 null, 1000, 1000);
-            Game n = new Game();
+            
         }
         private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -45,6 +52,8 @@ namespace Maze
         public Stopwatch Stopwatch { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        private int Xmin, Ymin, CellWid, CellHgt;
+
         private void Save_Click(object sender, RoutedEventArgs e)
         {
 
