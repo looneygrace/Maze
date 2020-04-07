@@ -27,7 +27,7 @@ namespace Maze
         string file;
         int w = 10;
         int h = 10;
-        public PlayGame(bool isNew) {
+        public PlayGame(bool isNew, string fileName) {
             
            
             this.Stopwatch = new Stopwatch();
@@ -69,7 +69,9 @@ namespace Maze
         }
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBoxResult result = MessageBox.Show(this, "Paused Timer");
+            //TODO: actually pause timer
+            
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {

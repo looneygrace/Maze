@@ -11,12 +11,12 @@ namespace Maze
     class Game
     {
 
-        private int score;
+        private int score;//the score of the player
 
-        int[,] maze;
-        int positionHeight, positionWidth;
-        int mazeWidth, mazeHeight;
-        string fileName;
+        int[,] maze;//the 2d array that holds the maze
+        int positionHeight, positionWidth;// Where the play starts out
+        int mazeWidth, mazeHeight;//the dimensions of the maze
+        string fileName;//the name of the file to store it;
         public Game(int w, int h, string file)
         {            
             if(fileName == "1" || fileName == "2" || fileName == "3")
@@ -44,7 +44,7 @@ namespace Maze
         }
         public void Initialize(int r)
         {
-            
+            //initializing the specifed row with numbers  1-mazewidth
             for(int i =0; i < mazeWidth; i++)
             {
                 maze[i, r] = i + 1;
@@ -97,7 +97,7 @@ namespace Maze
                     
                 }
             }
-            //
+            //TODO: Finish Implementation
         }
         public void makeOldMaze()
         {
@@ -106,17 +106,18 @@ namespace Maze
             //Width
             //Length
             //score
-                // 1 1 1 1 5 5 
-                // 1 1 1 5 1 1
-            //Source for reading in https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
+            // 1 1 1 1 5 5 
+            // 1 1 1 5 1 1
+            //Source: https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
+            //TODO: Implement
             using (StreamReader file = new StreamReader(fileName))
             {
                 int w = 0;
                 int h = 0;
-                
+
                 mazeWidth = int.Parse(file.ReadLine());
                 mazeHeight = int.Parse(file.ReadLine());
-                score = int.Parse(file.ReadLine());
+                setScore(int.Parse(file.ReadLine()));
                 maze = new int[mazeWidth, mazeHeight];
 
                 for(h = 0; h <mazeHeight;h++)
@@ -132,6 +133,7 @@ namespace Maze
         }
         public void displayMaze()
         {
+            //TODO Implement
             Console.WriteLine("Maze is working");
         }
         private void setScore(int s)
@@ -141,7 +143,7 @@ namespace Maze
 
         public void Save()
         {
-            //not implemented
+            //TODO: Implement
         }
     }
     

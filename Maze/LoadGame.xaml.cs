@@ -19,6 +19,7 @@ namespace Maze
     /// </summary>
     public partial class LoadGame : Window
     {
+        PlayGame game;
         public LoadGame()
         {
             InitializeComponent();
@@ -27,6 +28,25 @@ namespace Maze
         {
             var Main = new MainWindow();
             Main.Show();
+            this.Close();
+        }
+        private void Game1(object sender, RoutedEventArgs e)
+        {
+            game = new PlayGame(false, "1");
+            game.Show();
+            this.Close();
+        }
+        private void Game2(object sender, RoutedEventArgs e)
+        {
+            game = new PlayGame(false, "2");
+            game.Show();
+            this.Close();
+        }
+
+        private void Game3(object sender, RoutedEventArgs e)
+        {
+            game = new PlayGame(false, "3");
+            game.Show();
             this.Close();
         }
     }
