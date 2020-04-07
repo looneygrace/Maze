@@ -138,6 +138,11 @@ namespace Maze
         {
             score = s;
         }
+
+        public void Save()
+        {
+            //not implemented
+        }
     }
     
 

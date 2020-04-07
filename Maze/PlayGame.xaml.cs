@@ -21,23 +21,24 @@ namespace Maze
     /// <summary>
     /// Interaction logic for PlayGame.xaml
     /// </summary>
-    public partial class PlayGame : Window
+    public partial class PlayGame : Window, INotifyPropertyChanged
     {
         Game n;
-        bool isNewGame;
         string file;
         int w = 10;
         int h = 10;
         public PlayGame(bool isNew) {
-            n = new Game(w, h, file);
-            //if maze is old make old
-            InitializeComponent();
+            
+           
             this.Stopwatch = new Stopwatch();
             this.Stopwatch.Start();
             this._timer = new Timer(
                 new TimerCallback((s) => this.FirePropertyChanged(this, new PropertyChangedEventArgs("Stopwatch"))),
                 null, 1000, 1000);
-            
+            //n = new Game(w, h, file);
+            //if maze is old make old
+            InitializeComponent();
+
         }
         private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -56,7 +57,15 @@ namespace Maze
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Do you want to save your progress?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                n.Save();
+               
+            }
+            else
+            {
+                // Do not close the window  
+            }
         }
         private void Pause_Click(object sender, RoutedEventArgs e)
         {
@@ -64,7 +73,17 @@ namespace Maze
         }
         private void Exit_Click(object sender, RoutedEventArgs e)
         {
-
+            if (MessageBox.Show("Do you want to close this window?","Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                var MainWin = new MainWindow();
+                MainWin.Show();
+                this.Close();
+            }
+            else
+            {
+                // Do not close the window  
+            }
+            
         }
     }
 }
