@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Maze"
+        xmlns:Media="clr-namespace:Syncfusion.Windows.Controls.Media;assembly=Syncfusion.SfColorPalette.Wpf"
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800">
     <Grid>
@@ -28,6 +29,6 @@
         <TextBox HorizontalAlignment="Left" Height="16" Margin="500,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="GreenFloor" MaxLength="3"/>
         <TextBox HorizontalAlignment="Left" Height="16" Margin="600,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="BlueFloor" MaxLength="3"/>
         <Rectangle Fill="#FFF4F4F5" x:Name ="FloorColor"  HorizontalAlignment="Left" Height="76" Stroke="Black" VerticalAlignment="Top" Width="250" Margin="400,230,0,0"/>
-
+        <Media:SfColorPalette/>
     </Grid>
 </Window>
