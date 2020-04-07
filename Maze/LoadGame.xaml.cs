@@ -23,5 +23,11 @@ namespace Maze
         {
             InitializeComponent();
         }
+        private void Home_Click(object sender, RoutedEventArgs e)
+        {
+            var Main = new MainWindow();
+            Main.Show();
+            this.Close();
+        }
     }
 }

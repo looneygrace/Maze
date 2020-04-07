@@ -23,7 +23,7 @@
         <TextBox HorizontalAlignment="Left" Height="16" Margin="400,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="RedWall" MaxLength="3"/>
         <TextBox HorizontalAlignment="Left" Height="16" Margin="500,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="GreenWall" MaxLength="3"/>
         <TextBox HorizontalAlignment="Left" Height="16" Margin="600,50,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" Name="BlueWall" MaxLength="3"/>
-        <Rectangle Fill="#FFF4F4F5" Name ="WallColor"  HorizontalAlignment="Left" Height="76" Stroke="Black" VerticalAlignment="Top" Width="250" Margin="400,79,0,0" Fill="{Binding MyColor}" />
+        <Rectangle Fill="#FFF4F4F5" Name ="WallColor"  HorizontalAlignment="Left" Height="76" Stroke="Black" VerticalAlignment="Top" Width="250" Margin="400,79,0,0" />
         <TextBox HorizontalAlignment="Left" Height="16" Margin="400,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="RedFloor" MaxLength="3"/>
         <TextBox HorizontalAlignment="Left" Height="16" Margin="500,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="GreenFloor" MaxLength="3"/>
         <TextBox HorizontalAlignment="Left" Height="16" Margin="600,200,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="50" x:Name="BlueFloor" MaxLength="3"/>

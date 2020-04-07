@@ -36,17 +36,17 @@ namespace Maze
 
         }
 
+
         private void Floor_TextChanged(object sender, EventArgs e)
         {
-            RedFloor.Text = 
-}
+        }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             var Main = new MainWindow();
             Main.Show();
             this.Close();
         }
-        pub
+        
 
     }
     public partial class TextBoxColor : Settings
@@ -69,10 +69,12 @@ namespace Maze
             if (redInt >= 255)
             {
                 redInt = 255;
+                r = "255";
             }
             else if (redInt <= 0)
             {
                 red = 0;
+                r = "0";
             }
             else
             {
@@ -81,6 +83,7 @@ namespace Maze
             if (blueInt >= 255)
             {
                 blue = 255;
+                b = "255";
             }
             else if (blueInt <= 0)
             {
@@ -93,6 +96,7 @@ namespace Maze
             if (greenInt >= 255)
             {
                 green = 255;
+                g = "255";
             }
             
            
@@ -101,14 +105,11 @@ namespace Maze
         public Brush bConverter(string r, string b, string g)
         {
 
-            string r = Red.Text;
-            string b = Blue.Text;
-            string g = Green.Text;
+      
 
-
-            byte red = Convert.ToByte(w.Red);
-            byte blue = Convert.ToByte(w.Blue);
-            byte green = Convert.ToByte(w.Green);
+            byte red = Convert.ToByte(r);
+            byte blue = Convert.ToByte(b);
+            byte green = Convert.ToByte(g);
 
             SolidColorBrush brush = new SolidColorBrush();
             brush.Color = Color.FromRgb(red, green, blue);
