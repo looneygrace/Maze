@@ -59,8 +59,14 @@ namespace Maze
         {
             if (MessageBox.Show("Do you want to save your progress?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                n.Save();
-               
+                string saveLocation = "1";
+                //TODO: Ask where to save
+
+                n.Save(saveLocation);
+                var MainWin = new MainWindow();
+                MainWin.Show();
+                this.Close();
+
             }
             else
             {

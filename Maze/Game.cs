@@ -107,7 +107,7 @@ namespace Maze
             //Length
             //score
             // 1 1 1 1 5 5 
-            // 1 1 1 5 1 1
+            // 1 1 1 5 5 6
             //Source: https://www.c-sharpcorner.com/UploadFile/mahesh/how-to-read-a-text-file-in-C-Sharp/
             //TODO: Implement
             using (StreamReader file = new StreamReader(fileName))
@@ -141,7 +141,7 @@ namespace Maze
             score = s;
         }
 
-        public void Save()
+        public void Save(string fileName)
         {
             //TODO: Implement
         }

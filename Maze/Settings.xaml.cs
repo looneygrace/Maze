@@ -19,26 +19,43 @@ namespace Maze
     /// </summary>
     public partial class Settings : Window
     {
-        TextBoxColor wall;
-        TextBoxColor floor;
+
 
         public Settings()
         {
 
             InitializeComponent();
-            wall = new TextBoxColor();
-            floor = new TextBoxColor();
 
+            System.Text.RegularExpressions.Regex.IsMatch(RedFloor.Text, "[ ^ 0-9]");
+            System.Text.RegularExpressions.Regex.IsMatch(GreenFloor.Text, "[ ^ 0-9]");
+            System.Text.RegularExpressions.Regex.IsMatch(BlueFloor.Text, "[ ^ 0-9]");
+            System.Text.RegularExpressions.Regex.IsMatch(RedWall.Text, "[ ^ 0-9]");
+            System.Text.RegularExpressions.Regex.IsMatch(BlueWall.Text, "[ ^ 0-9]");
+            System.Text.RegularExpressions.Regex.IsMatch(GreenWall.Text, "[ ^ 0-9]");
 
-            WallColor.Fill = wall.bConverter(RedWall.Text, BlueWall.Text, GreenWall.Text);
-            
-            FloorColor.Fill = floor.bConverter(RedFloor.Text,BlueFloor.Text, GreenFloor.Text);
+            RedWall.Text = "0";
+            BlueWall.Text = "0";
+            GreenWall.Text = "0";
+            RedFloor.Text = "0";
+            GreenFloor.Text = "0";
+            BlueFloor.Text = "0";
+
 
         }
 
 
         private void Floor_TextChanged(object sender, EventArgs e)
         {
+
+            SolidColorBrush f = new SolidColorBrush();
+            f.Color = Color.FromRgb(Convert.ToByte(RedFloor.Text), Convert.ToByte(BlueFloor.Text), Convert.ToByte(GreenFloor.Text));
+            FloorColor.Fill = f;
+        }
+        private void Wall_TextChanged(object sender, EventArgs e)
+        {
+            SolidColorBrush w = new SolidColorBrush();
+            w.Color = Color.FromRgb(Convert.ToByte(RedWall.Text), Convert.ToByte(BlueWall.Text), Convert.ToByte(GreenWall.Text));
+            WallColor.Fill = w;
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
@@ -46,76 +63,15 @@ namespace Maze
             Main.Show();
             this.Close();
         }
-        
 
-    }
-    public partial class TextBoxColor : Settings
-    {
-        int red;
-        int blue;
-        int green;
-        public TextBoxColor()
+        private void UpdateFloor_Click(object sender, RoutedEventArgs e)
         {
-            red = 0;
-            blue = 0;
-            green = 0;
+            Floor_TextChanged(sender, e);
         }
-        public void updateColors(string r, string b, string g)
+
+        private void UpdateWall_Click(object sender, RoutedEventArgs e)
         {
-            int redInt = int.Parse(r);
-            int greenInt = int.Parse(g);
-            int blueInt = int.Parse(b);
-            //Red handler
-            if (redInt >= 255)
-            {
-                redInt = 255;
-                r = "255";
-            }
-            else if (redInt <= 0)
-            {
-                red = 0;
-                r = "0";
-            }
-            else
-            {
-                red = redInt;
-            }
-            if (blueInt >= 255)
-            {
-                blue = 255;
-                b = "255";
-            }
-            else if (blueInt <= 0)
-            {
-                blue = 0;
-            }
-            else
-            {
-                blue = blueInt;
-            }
-            if (greenInt >= 255)
-            {
-                green = 255;
-                g = "255";
-            }
-
-            
-           
-
-        }
-        public Brush bConverter(string r, string b, string g)
-        {
-
-      
-
-            byte red = Convert.ToByte(r);
-            byte blue = Convert.ToByte(b);
-            byte green = Convert.ToByte(g);
-
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.Color = Color.FromRgb(red, green, blue);
-            return brush;
+            Wall_TextChanged(sender, e);
         }
     }
-    
 }
