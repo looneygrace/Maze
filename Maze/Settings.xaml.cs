@@ -26,13 +26,7 @@ namespace Maze
 
             InitializeComponent();
 
-            System.Text.RegularExpressions.Regex.IsMatch(RedFloor.Text, "[ ^ 0-9]");
-            System.Text.RegularExpressions.Regex.IsMatch(GreenFloor.Text, "[ ^ 0-9]");
-            System.Text.RegularExpressions.Regex.IsMatch(BlueFloor.Text, "[ ^ 0-9]");
-            System.Text.RegularExpressions.Regex.IsMatch(RedWall.Text, "[ ^ 0-9]");
-            System.Text.RegularExpressions.Regex.IsMatch(BlueWall.Text, "[ ^ 0-9]");
-            System.Text.RegularExpressions.Regex.IsMatch(GreenWall.Text, "[ ^ 0-9]");
-
+            
             RedWall.Text = "0";
             BlueWall.Text = "0";
             GreenWall.Text = "0";
@@ -47,6 +41,10 @@ namespace Maze
         private void Floor_TextChanged(object sender, EventArgs e)
         {
 
+            RedFloor.Text = valueCheck(RedFloor.Text);
+            GreenFloor.Text = valueCheck(GreenFloor.Text);
+            BlueFloor.Text = valueCheck(BlueFloor.Text);
+
             SolidColorBrush f = new SolidColorBrush();
             f.Color = Color.FromRgb(Convert.ToByte(RedFloor.Text), Convert.ToByte(BlueFloor.Text), Convert.ToByte(GreenFloor.Text));
             FloorColor.Fill = f;
@@ -54,12 +52,19 @@ namespace Maze
         private void Wall_TextChanged(object sender, EventArgs e)
         {
             SolidColorBrush w = new SolidColorBrush();
+            RedWall.Text = valueCheck(RedWall.Text);
+            GreenWall.Text = valueCheck(GreenWall.Text);
+            BlueWall.Text = valueCheck(BlueWall.Text);
+
             w.Color = Color.FromRgb(Convert.ToByte(RedWall.Text), Convert.ToByte(BlueWall.Text), Convert.ToByte(GreenWall.Text));
+
             WallColor.Fill = w;
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             var Main = new MainWindow();
+            //TODO make the setting change universal
+            
             Main.Show();
             this.Close();
         }
@@ -72,6 +77,28 @@ namespace Maze
         private void UpdateWall_Click(object sender, RoutedEventArgs e)
         {
             Wall_TextChanged(sender, e);
+        }
+        private string valueCheck(string x)
+        {
+            if (!Char.IsDigit(x[0]) || !Char.IsDigit(x[1]) || !Char.IsDigit(x[2]))
+            {
+                return "0";
+            }
+            else
+            {
+                if (int.Parse(x) < 0)
+                {
+                    return "0";
+                }
+                else if (int.Parse(x) > 255)
+                {
+                    return "255";
+                }
+                else
+                {
+                    return x;
+                }
+            }
         }
     }
 }
