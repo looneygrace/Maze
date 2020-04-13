@@ -23,7 +23,7 @@ namespace Maze
     {
         private string MusicFileName;
         private MediaPlayer sound;
-        
+        private Theme theme;
         public Settings()
         {
 
@@ -86,10 +86,7 @@ namespace Maze
 
         private string valueCheck(string x)
         {
-            if (!Char.IsDigit(x[0]) || !Char.IsDigit(x[1]) || !Char.IsDigit(x[2]))
-            {
-                return "0";
-            }
+           
             if (x.Length >= 1)
             {
                 if (!Char.IsDigit(x[0]))
@@ -135,6 +132,10 @@ namespace Maze
 
         private void CreepyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
+            if(NoMusic.IsChecked != true)
+            {
+                sound.Stop();
+            }
             CreepyMusic.IsChecked = true;
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
@@ -145,6 +146,10 @@ namespace Maze
 
         private void GardenMusic_Uncheck(object sender, RoutedEventArgs e)
         {
+            if (NoMusic.IsChecked != true)
+            {
+                sound.Stop();
+            }
             CreepyMusic.IsChecked = false;
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = true;
@@ -156,6 +161,10 @@ namespace Maze
 
         private void HappyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
+            if (NoMusic.IsChecked != true)
+            {
+                sound.Stop();
+            }
             CreepyMusic.IsChecked = false;
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
@@ -166,6 +175,10 @@ namespace Maze
 
         private void SpaceMusic_UnCheck(object sender, RoutedEventArgs e)
         {
+            if (NoMusic.IsChecked != true)
+            {
+                sound.Stop();
+            }
             CreepyMusic.IsChecked = false;
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
@@ -223,6 +236,7 @@ namespace Maze
 
         private void BrickTheme_Checked(object sender, RoutedEventArgs e)
         {
+
             Stone.IsChecked = false;
             Brick.IsChecked = true;
             Shrub.IsChecked = false;
@@ -247,6 +261,7 @@ namespace Maze
             Dungeon.IsChecked = true;
             Custom.IsChecked = false;
         }
+
         private void StoneTheme_Checked(object sender, RoutedEventArgs e)
         {
             Stone.IsChecked = true;
@@ -269,5 +284,133 @@ namespace Maze
         }
 
         
+    }
+    public partial class Theme
+    {
+        public bool brick;
+        public bool custom;
+        public CustomTheme c;
+        public bool stone;
+        public bool shrub;
+        public bool dungeon;
+        public string musicFileName;
+        SolidColorBrush w;
+        SolidColorBrush f;
+        public Theme(SolidColorBrush wall, SolidColorBrush floor, string theme)
+        {
+            w = wall;
+            f = floor;
+            updateTheme(theme);
+        }
+        public void updateTheme(string theme)
+        {
+            bool isGood;
+            if(theme == "brick")
+            {
+                brick = true;
+                custom = false;
+                stone = false;
+                shrub = false;
+                dungeon = false;
+
+            }
+            else if (theme == "custom")
+            {
+                brick = true;
+                custom = true;
+                stone = false;
+                shrub = false;
+                dungeon = false;
+                isGood = c.isBrushGood(w, f);
+
+            }
+            if (theme == "stone")
+            {
+                brick = false;
+                custom = false;
+                stone = true;
+                shrub = false;
+                dungeon = false;
+
+            }
+            if (theme == "shrub")
+            {
+                brick = false;
+                custom = false;
+                stone = false;
+                shrub = true;
+                dungeon = false;
+
+            }
+            if (theme == "dungeon")
+            {
+                brick = false;
+                custom = false;
+                stone = false;
+                shrub = false;
+                dungeon = true;
+
+            }
+
+        }
+
+        public void updateMusic(string musicFile)
+        {
+            musicFileName = musicFile;
+        }
+
+    }
+    public partial class CustomTheme : Window
+    {
+        public SolidColorBrush floor;
+        public SolidColorBrush wall;
+
+        public void updateFloor(SolidColorBrush f)
+        {
+            //Check if walls has the same values if it does pop message
+            floor = f;
+        }
+
+        public void updateWall(SolidColorBrush w)
+        {
+            //Check if floors have the same values
+            wall = w;
+        }
+        public bool isBrushGood(SolidColorBrush w, SolidColorBrush f)
+        {
+            bool isGood;
+            int redFloorValue = Convert.ToInt32(f.Color.R);
+            int blueFloorValue = Convert.ToInt32(f.Color.B);
+            int greenFloorValue = Convert.ToInt32(f.Color.G);
+            int redWallValue = Convert.ToInt32(w.Color.R);
+            int blueWallValue = Convert.ToInt32(w.Color.R);
+            int greenWallValue = Convert.ToInt32(w.Color.R);
+            if ((redFloorValue - redWallValue) >= 50 || (redWallValue - redFloorValue) >= 50)
+            {
+                isGood = true;
+            }
+            else
+            {
+                isGood = false;
+            }
+            if ((greenFloorValue - greenWallValue) >= 50 || (greenWallValue - greenFloorValue) >= 50)
+            {
+                isGood = true;
+            }
+            else
+            {
+                isGood = false;
+            }
+            if ((blueFloorValue - blueWallValue) >= 50 || (blueWallValue - blueFloorValue) >= 50)
+            {
+                isGood = true;
+            }
+            else
+            {
+                isGood = false;
+            }
+            return isGood;
+        }
+
     }
 }
