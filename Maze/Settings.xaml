@@ -12,11 +12,11 @@
                    " Margin="50,23,0,0" Width="170"/>
 
         <StackPanel HorizontalAlignment="Left" Height="100" Margin="50,79,0,0" VerticalAlignment="Top" Width="177">
-            <CheckBox Content="Brick" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <CheckBox Content="Bush" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <CheckBox Content="Creepy Dungeon" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <CheckBox Content="Stone" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <CheckBox Content="Custom" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <CheckBox Content="Brick" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" Checked="BrickTheme_Checked" Name ="Brick"/>
+            <CheckBox Content="Shrub" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" Checked="ShrubTheme_Checked" Name ="Shrub"/>
+            <CheckBox Content="Creepy Dungeon" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" Checked="DungeonTheme_Checked" Name="Dungeon"/>
+            <CheckBox Content="Stone" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" Checked="StoneTheme_Checked" Name="Stone"/>
+            <CheckBox Content="Custom" HorizontalAlignment="Left" VerticalAlignment="Top" IsChecked="False" Checked="CustomTheme_Checked" Name ="Custom"/>
         </StackPanel>
 
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Music" VerticalAlignment="Top" TextAlignment="Center" FontSize="25

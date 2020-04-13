@@ -29,16 +29,18 @@ namespace Maze
 
             InitializeComponent();
 
-            MusicFileName = "Nothing";
+            MusicFileName = "NA";
             RedWall.Text = "0";
             BlueWall.Text = "0";
             GreenWall.Text = "0";
             RedFloor.Text = "0";
             GreenFloor.Text = "0";
             BlueFloor.Text = "0";
+            MusicFileName = "Nothing";
+            sound = new MediaPlayer();
             //sound.PlayLooping();
         }
-
+//custom colors
         private void Floor_TextChanged(object sender, EventArgs e)
         {
 
@@ -88,48 +90,47 @@ namespace Maze
             {
                 return "0";
             }
-            if(x.Length >= 1)
+            if (x.Length >= 1)
             {
                 if (!Char.IsDigit(x[0]))
                 {
                     return "0";
                 }
             }
-            if(x.Length >= 2)
+            if (x.Length >= 2)
             {
                 if (!Char.IsDigit(x[1]))
                 {
                     return "0";
                 }
             }
-            if(x.Length == 3)
+            if (x.Length == 3)
             {
-                if(!Char.IsDigit(x[2]))
+                if (!Char.IsDigit(x[2]))
                 {
                     return "0";
                 }
             }
             if (int.Parse(x) < 0)
-                {
-                    return "0";
-                }
+            {
+                return "0";
+            }
             else if (int.Parse(x) > 255)
-                {
-                    return "255";
-                }
+            {
+                return "255";
+            }
             else
-                {
-                    return Convert.ToString(int.Parse(x));
-                }
-            }        
+            {
+                return Convert.ToString(int.Parse(x));
+            }
+        } 
+ //Music       
         private void NoMusic_Uncheck(object sender, RoutedEventArgs e)
         {
             CreepyMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
             SpaceMusic.IsChecked = false;
             HappyMusic.IsChecked = false;
-            //sound.Stop();
-
         }
 
         private void CreepyMusic_Uncheck(object sender, RoutedEventArgs e)
@@ -172,6 +173,8 @@ namespace Maze
             HappyMusic.IsChecked = false;
             PlayMusic(sender, e);
         }
+
+        //play music
         private void PlayMusic(object sender, RoutedEventArgs e)
         {
             if (MusicFileName != "Nothing")
@@ -180,36 +183,88 @@ namespace Maze
             }
             if(CreepyMusic.IsChecked == true)
             {
-                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/CreepyMusic.mp3";
+                MusicFileName = "../../../music/CreepyMusic.mp3";
             }
             else if(GardenMusic.IsChecked == true)
             {
-                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/GardenMusic.mp3";
+                MusicFileName = "../../../music/GardenMusic.mp3";
                 //(The Calling - The Lemming Shepherds)
             }
             else if(HappyMusic.IsChecked == true){
-                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/HappyMusic.wav";
+                MusicFileName = "../../../music/HappyMusic.wav";
             }
             else if(SpaceMusic.IsChecked == true)
             {
-                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/SpaceMusic.wav";
+                MusicFileName = "../../../music/SpaceMusic.wav";
             }
             else
             {
                 MusicFileName = "Nothing";
+                sound.Stop();
             }
             var uri = new Uri(MusicFileName, UriKind.Relative);
             
             sound = new MediaPlayer();
 
             sound.Open(uri);
+            
             sound.Play();
             SystemSounds.Beep.Play();
             Console.WriteLine(MusicFileName);
         }
+
         // Change the volume of the media.
         private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
+
+        }
+ 
+ //themes
+
+        private void BrickTheme_Checked(object sender, RoutedEventArgs e)
+        {
+            Stone.IsChecked = false;
+            Brick.IsChecked = true;
+            Shrub.IsChecked = false;
+            Dungeon.IsChecked = false;
+            Custom.IsChecked = false;
+        }
+
+        private void ShrubTheme_Checked(object sender, RoutedEventArgs e)
+        {
+            Stone.IsChecked = false;
+            Brick.IsChecked = false;
+            Shrub.IsChecked = true;
+            Dungeon.IsChecked = false;
+            Custom.IsChecked = false;
+        }
+
+        private void DungeonTheme_Checked(object sender, RoutedEventArgs e)
+        {
+            Stone.IsChecked = false;
+            Brick.IsChecked = false;
+            Shrub.IsChecked = false;
+            Dungeon.IsChecked = true;
+            Custom.IsChecked = false;
+        }
+        private void StoneTheme_Checked(object sender, RoutedEventArgs e)
+        {
+            Stone.IsChecked = true;
+            Brick.IsChecked = false;
+            Shrub.IsChecked = false;
+            Dungeon.IsChecked = false;
+            Custom.IsChecked = false;
+        }
+
+        private void CustomTheme_Checked(object sender, RoutedEventArgs e)
+        {
+            Stone.IsChecked = false;
+            Brick.IsChecked = false;
+            Shrub.IsChecked = false;
+            Dungeon.IsChecked = false;
+            Custom.IsChecked = true;
+            //TODO: Unselect All
+            //TODO: Get Values from custom panel
 
         }
 
