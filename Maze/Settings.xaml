@@ -26,6 +26,7 @@
             <CheckBox Content="Creepy Music" HorizontalAlignment="Left" IsChecked="False" Checked="CreepyMusic_Uncheck" VerticalAlignment="Top" Name ="CreepyMusic"/>
             <CheckBox Content="Happy Music" HorizontalAlignment="Left" IsChecked="False" Checked="HappyMusic_Uncheck"  VerticalAlignment="Top" Name ="HappyMusic"/>
             <CheckBox Content="Garden Music" HorizontalAlignment="Left" IsChecked="False" Checked="GardenMusic_Uncheck" VerticalAlignment="Top" Name ="GardenMusic"/>
+            <CheckBox Content="Space Music" HorizontalAlignment="Left" IsChecked="False" Checked="SpaceMusic_UnCheck" VerticalAlignment="Top" Name ="SpaceMusic"/>
             <CheckBox Content="No music" HorizontalAlignment="Left" IsChecked="True"  Checked="NoMusic_Uncheck" VerticalAlignment="Top" Name ="NoMusic"/>
         </StackPanel>
         <!-- Volume slider. This slider allows a Volume range between 0 and 1. -->

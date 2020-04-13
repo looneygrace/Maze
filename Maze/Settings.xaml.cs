@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,21 +21,22 @@ namespace Maze
     /// </summary>
     public partial class Settings : Window
     {
-        private MediaPlayer mediaPlayer = new MediaPlayer();
         private string MusicFileName;
+        private MediaPlayer sound;
+        
         public Settings()
         {
 
             InitializeComponent();
 
-            
+            MusicFileName = "Nothing";
             RedWall.Text = "0";
             BlueWall.Text = "0";
             GreenWall.Text = "0";
             RedFloor.Text = "0";
             GreenFloor.Text = "0";
             BlueFloor.Text = "0";
-            mediaPlayer.Play();
+            //sound.PlayLooping();
         }
 
         private void Floor_TextChanged(object sender, EventArgs e)
@@ -86,29 +88,47 @@ namespace Maze
             {
                 return "0";
             }
-            else
+            if(x.Length >= 1)
             {
-                if (int.Parse(x) < 0)
+                if (!Char.IsDigit(x[0]))
                 {
                     return "0";
                 }
-                else if (int.Parse(x) > 255)
+            }
+            if(x.Length >= 2)
+            {
+                if (!Char.IsDigit(x[1]))
+                {
+                    return "0";
+                }
+            }
+            if(x.Length == 3)
+            {
+                if(!Char.IsDigit(x[2]))
+                {
+                    return "0";
+                }
+            }
+            if (int.Parse(x) < 0)
+                {
+                    return "0";
+                }
+            else if (int.Parse(x) > 255)
                 {
                     return "255";
                 }
-                else
+            else
                 {
                     return Convert.ToString(int.Parse(x));
                 }
-            }
-        }
-        
+            }        
         private void NoMusic_Uncheck(object sender, RoutedEventArgs e)
         {
             CreepyMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
+            SpaceMusic.IsChecked = false;
             HappyMusic.IsChecked = false;
-            mediaPlayer.Stop();
+            //sound.Stop();
 
         }
 
@@ -118,6 +138,7 @@ namespace Maze
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
             HappyMusic.IsChecked = false;
+            SpaceMusic.IsChecked = false;
             PlayMusic(sender, e);
         }
 
@@ -127,6 +148,8 @@ namespace Maze
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = true;
             HappyMusic.IsChecked = false;
+            SpaceMusic.IsChecked = false;
+            MusicFileName = "Nothing";
             PlayMusic(sender, e);
         }
 
@@ -136,37 +159,60 @@ namespace Maze
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
             HappyMusic.IsChecked = true;
+            SpaceMusic.IsChecked = false;
             PlayMusic(sender, e);
         }
 
+        private void SpaceMusic_UnCheck(object sender, RoutedEventArgs e)
+        {
+            CreepyMusic.IsChecked = false;
+            NoMusic.IsChecked = false;
+            GardenMusic.IsChecked = false;
+            SpaceMusic.IsChecked = true;
+            HappyMusic.IsChecked = false;
+            PlayMusic(sender, e);
+        }
         private void PlayMusic(object sender, RoutedEventArgs e)
         {
+            if (MusicFileName != "Nothing")
+            {
+                sound.Stop();
+            }
             if(CreepyMusic.IsChecked == true)
             {
-                MusicFileName = "SpaceMusic.wav";
+                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/CreepyMusic.mp3";
             }
             else if(GardenMusic.IsChecked == true)
             {
-                MusicFileName = "GardenMusic.mp3";
+                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/GardenMusic.mp3";
                 //(The Calling - The Lemming Shepherds)
+            }
+            else if(HappyMusic.IsChecked == true){
+                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/HappyMusic.wav";
+            }
+            else if(SpaceMusic.IsChecked == true)
+            {
+                MusicFileName = "C:/Users/loone/source/repos/Maze/Maze/obj/Debug/music/SpaceMusic.wav";
             }
             else
             {
-                MusicFileName = "Nothing.mp3";
+                MusicFileName = "Nothing";
             }
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
-            if (openFileDialog.ShowDialog() == true)
-            {
-                mediaPlayer.Open(new Uri(MusicFileName, UriKind.Relative));
-                mediaPlayer.Play();
-            }
+            var uri = new Uri(MusicFileName, UriKind.Relative);
+            
+            sound = new MediaPlayer();
+
+            sound.Open(uri);
+            sound.Play();
+            SystemSounds.Beep.Play();
+            Console.WriteLine(MusicFileName);
         }
         // Change the volume of the media.
         private void ChangeMediaVolume(object sender, RoutedPropertyChangedEventArgs<double> args)
         {
-            mediaPlayer.Volume = (double)volumeSlider.Value;
+
         }
 
+        
     }
 }
