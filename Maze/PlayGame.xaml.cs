@@ -27,6 +27,7 @@ namespace Maze
         string file;
         int w = 10;
         int h = 10;
+        string gameString;
         public PlayGame(bool isNew, string fileName) {
             
            
@@ -35,10 +36,11 @@ namespace Maze
             this._timer = new Timer(
                 new TimerCallback((s) => this.FirePropertyChanged(this, new PropertyChangedEventArgs("Stopwatch"))),
                 null, 1000, 1000);
-            //n = new Game(w, h, file);
+            n = new Game(w, h, file);
+
             //if maze is old make old
             InitializeComponent();
-
+           
         }
         private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {

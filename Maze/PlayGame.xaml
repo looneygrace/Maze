@@ -29,5 +29,6 @@
                 VerticalAlignment="Top"  >
             <TextBlock Text="{Binding Path=n.score, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"  Background="LightGray" FontSize ="15" TextAlignment="Center"  />
         </Border>
+        <TextBlock Text="" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="277" Width="625" Margin="50,80,0,0" Name="MazeView"/>
     </Grid>
 </Window>

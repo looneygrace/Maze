@@ -1,10 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
+using JetBrains.Annotations;
+using System.Collections.Generic;
+using System.Windows.Documents;
+using NPOI.SS.Formula.Functions;
+using System.Windows.Forms;
 
 namespace Maze
 {
@@ -12,14 +17,26 @@ namespace Maze
     {
 
         private int score;//the score of the player
+        private int GridSize = 50;
+        private const int MazeSize = 11;
+        private Grid _grid;
+        private IMazeAlgorithm _algorithm;
+        private Point? _tempPoint;
+        private Point? _startPoint;
+        private Point? _endPoint;
 
+        private bool IsAnimating;
+        private MazeStyle _mode;
         int[,] maze;//the 2d array that holds the maze
-        int positionHeight, positionWidth;// Where the play starts out
+        int positionHeight, positionWidth;// Where the player starts out
+
         int mazeWidth, mazeHeight;//the dimensions of the maze
+
         string fileName;//the name of the file to store it;
         public Game(int w, int h, string file)
-        {            
-            if(fileName == "1" || fileName == "2" || fileName == "3")
+        {
+            
+            if (fileName == "1" || fileName == "2" || fileName == "3")
             {
                 //open saved maze
                 fileName = file;
@@ -31,80 +48,44 @@ namespace Maze
             else if (fileName == "none")
             {
                 //make new maze
-                
+
                 fileName = file;
                 mazeWidth = w;
                 mazeHeight = h;
                 setScore(0);
-                Initialize(0);
+                //Initialize(0);
                 makeMaze(false);
                 displayMaze();
 
             }
         }
-        public void Initialize(int r)
-        {
-            //initializing the specifed row with numbers  1-mazewidth
-            for(int i =0; i < mazeWidth; i++)
-            {
-                maze[i, r] = i + 1;
-            }
-        }
+
         private void makeMaze(bool exists)
         {
             //if true, a maze exists and call the file that holds the maze
             //if false, then maze doesn't exist we create a new maze
-            if(exists == false)
+            if (exists == false)
             {
-                makeNewMaze();
+                //makeNewMaze();
             }
             else
             {
                 makeOldMaze();
             }
         }
-        private void makeNewMaze()
+        private void makeNewMaze(PictureBox x)
         {
-            //TODO: Assign a start position
-            positionWidth = 0;
-            //randomly choose wall to merge
-            //when merging change number to lowest
-
-            //choose how many walls to destoy
-            //choose which walls to destroy
-            var rand = new Random();
-            int numWallsDestroy = rand.Next(1, mazeWidth - 1);
-            int[] walls = new int[mazeWidth + 1];
-            for (int i = 1; i < mazeWidth; i++ ) {
-                walls[i] = i;
-            }
-
-
-            int d = 0;
-            while(d < numWallsDestroy)
-            {
-                int wall = rand.Next(0, numWallsDestroy);
-                //if wall exists remove it
-                if (walls.Contains(wall))
-                {
-                    //remove wall
-                    if (wall != 0 && wall != mazeWidth + 1)
-                    {//removed wall is not the outside wall
-                        walls[wall] = wall - 1;
-                        maze[wall,0] = maze[wall - 1,0];
-                        d++;
-                    }
-                    
-                }
-            }
-            //TODO: Finish Implementation
+            _grid = new Grid(MazeSize, MazeSize);
         }
+
         public void makeOldMaze()
         {
             //make a maze container
             //file syntax
             //Width
             //Length
+            //position X
+            //position Y
             //score
             // 1 1 1 1 5 5 
             // 1 1 1 5 5 6
@@ -117,14 +98,16 @@ namespace Maze
 
                 mazeWidth = int.Parse(file.ReadLine());
                 mazeHeight = int.Parse(file.ReadLine());
+                positionHeight = int.Parse(file.ReadLine());
+                positionWidth = int.Parse(file.ReadLine());
                 setScore(int.Parse(file.ReadLine()));
                 maze = new int[mazeWidth, mazeHeight];
 
-                for(h = 0; h <mazeHeight;h++)
+                for (h = 0; h < mazeHeight; h++)
                 {
-                    for(w = 0; w < mazeWidth; w++)
+                    for (w = 0; w < mazeWidth; w++)
                     {
-                        maze[w,h] = int.Parse(file.ReadLine());
+                        maze[w, h] = int.Parse(file.ReadLine());
                     }
                 }
                 file.Close();

@@ -28,7 +28,7 @@ namespace Maze
 
         private void New_Game_Click(object sender, RoutedEventArgs e)
         {
-            var NewGame = new PlayGame(true, "0");
+            MazeForm NewGame = new MazeForm();
             NewGame.Show();
             this.Close();
         }
