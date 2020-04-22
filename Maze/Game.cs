@@ -65,7 +65,7 @@ namespace Maze
         }
         private void makeNewMaze(PictureBox x)
         {
-            _grid = new Grid(MazeSize, MazeSize);
+            //_grid = new Grid(MazeSize, MazeSize);
         }
 
         public void makeOldMaze()
@@ -91,13 +91,13 @@ namespace Maze
                 positionHeight = int.Parse(file.ReadLine());
                 positionWidth = int.Parse(file.ReadLine());
                 setScore(int.Parse(file.ReadLine()));
-                maze = new int[mazeWidth, mazeHeight];
+                //maze = new int[mazeWidth, mazeHeight];
 
                 for (h = 0; h < mazeHeight; h++)
                 {
                     for (w = 0; w < mazeWidth; w++)
                     {
-                        maze[w, h] = int.Parse(file.ReadLine());
+                        //maze[w, h] = int.Parse(file.ReadLine());
                     }
                 }
                 file.Close();

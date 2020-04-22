@@ -1,8 +1,8 @@
-namespace mazes.Core.Grids.Interfaces {
+namespace maze.Core.Grids.Interfaces {
     using System;
     using System.Drawing;
 
-    using mazes.Core.Cells;
+    using maze.Core.Cells;
 
     public interface IGrid {
         Cell RandomCell(Random random = null);

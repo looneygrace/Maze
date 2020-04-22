@@ -1,11 +1,11 @@
-﻿namespace mazes.Core.Grids {
+﻿namespace maze.Core.Grids {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
 
-    using mazes.Core.Cells;
-    using mazes.Core.Grids.Cartesian;
+    using maze.Core.Cells;
+    using maze.Core.Grids.Cartesian;
 
     public class WeaveGrid : Grid {
         private readonly List<UnderCell> _underCells = new List<UnderCell>();

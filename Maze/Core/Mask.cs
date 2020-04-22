@@ -1,13 +1,13 @@
-﻿namespace mazes.Core {
+﻿namespace maze.Core {
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
     using System.Linq;
-
-    using mazes.Core.Cells;
-    using mazes.Core.Grids;
-    using mazes.Core.Grids.Cartesian;
+    
+    using maze.Core.Cells;
+    using maze.Core.Grids;
+    using maze.Core.Grids.Cartesian;
 
     public class Mask {
         public int Rows { get; }

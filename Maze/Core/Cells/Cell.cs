@@ -1,4 +1,4 @@
-﻿namespace mazes.Core.Cells {
+﻿namespace maze.Core.Cells {
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;

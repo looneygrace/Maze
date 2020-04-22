@@ -1,4 +1,4 @@
-namespace mazes.Core {
+namespace maze.Core {
     public static class IntExtensions {
         public static string ToBase36(this int i) {
             const string chars = "0123456789abcdefghijklmnopqrstuvwxyz";

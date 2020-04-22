@@ -1,12 +1,12 @@
-﻿namespace mazes.Algorithms {
+﻿namespace maze.Algorithms {
     using System;
     using System.Collections.Generic;
     using System.Linq;
 
-    using mazes.Core;
-    using mazes.Core.Cells;
-    using mazes.Core.Grids;
-    using mazes.Core.Grids.Cartesian;
+    using maze.Core;
+    using maze.Core.Cells;
+    using maze.Core.Grids;
+    using maze.Core.Grids.Cartesian;
 
     public class BinaryTree : IMazeAlgorithm {
         private readonly Grid _grid;

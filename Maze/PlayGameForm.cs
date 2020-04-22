@@ -6,19 +6,28 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Maze
 {
     using System;
     using System.Drawing;
-    using System.Reflection;
-    using System.Threading;
     using System.Windows.Forms;
 
-    
+    using maze.Algorithms;
+    using maze.Core;
 
-    public partial class MazeForm : Form
+    using maze.Core.Cells;
+    using maze.Core.Grids;
+    using maze.Core.Grids.Cartesian;
+    using maze.Core.Grids.Interfaces;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Threading;
+    using Timer = System.Threading.Timer;
+    using ImageProcessor.Processors;
+    using maze.Core.Grids.Masked;
+    
+    public partial class MazeForm : Form, INotifyPropertyChanged
     {
         private int GridSize = 50;
         private const int MazeSize = 11;
@@ -27,37 +36,46 @@ namespace Maze
         private Point? _tempPoint;
         private Point? _startPoint;
         private Point? _endPoint;
-        
+
         private bool IsAnimating;
         private MazeStyle _mode;
 
         public MazeForm()
         {
-
             InitializeComponent();
+            float nudInset = 0;
             _grid = new Grid(MazeSize, MazeSize);
-            pbMaze.Image = _grid.ToImg(GridSize, 0);
+            pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
             var it = typeof(IMazeAlgorithm);
             var algoNames = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes())
                 .Where(t => it.IsAssignableFrom(t) && t.IsClass).Select(t => t.Name).ToArray();
-    
+            cbAlgorithm.Items.AddRange(algoNames);
+
+            cbAlgorithm.SelectedIndex = 0;
             SetAlgorithm();
 
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
+            pbMask.Image = null;
 
         }
 
         private void TsmiPickEndOnClick(object sender, EventArgs eventArgs)
         {
-            
+            if (pbMask.Image != null)
+            {
+                return;
+            }
             _endPoint = _tempPoint;
             tsslEndPoint.Text = "End: " + _endPoint;
         }
 
         private void TsmiPickStartOnClick(object sender, EventArgs eventArgs)
         {
-            
+            if (pbMask.Image != null)
+            {
+                return;
+            }
             _startPoint = _tempPoint;
             tsslStartPoint.Text = "Start: " + _startPoint;
         }
@@ -72,25 +90,42 @@ namespace Maze
 
         private void DrawMaze(object sender, EventArgs e)
         {
-            
-            Image img;
-            var grid = new Grid(MazeSize, MazeSize);
-            
-            img = grid.ToImg(GridSize, GridSize);
-            pbMaze.Image = img;
-            
+            if (cbAlgorithm.SelectedItem != null)
+            {
+                Image img;
+                var grid = new Grid(MazeSize, MazeSize);
+                if (pbMask.Image != null)
+                {
+                    var mask = maze.Core.Mask.FromBitmap((Bitmap)pbMask.Image);
+                    grid = new MaskedGrid(mask);
+                }
+                if (!CreateSelectedMaze(grid))
+                {
+                    return;
+                }
+                img = grid.ToImg(GridSize, (float)nudInset.Value);
+                pbMaze.Image = img;
+            }
         }
 
         private bool CreateSelectedMaze(IGrid grid)
         {
-            var algo = "BinaryTree";
+            var algo = (string)cbAlgorithm.SelectedItem;
 
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == algo);
-            
+            if (type == null)
+            {
+                MessageBox.Show("No algorithm type for " + algo);
+                return false;
+            }
+            if (pbMask.Image != null && (type == typeof(BinaryTree)))
+            {
+                MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
+            }
 
-            type.GetMethod("Maze", new[] { typeof(Grid), typeof(int) }).Invoke(null, new object[] { grid, GridSize});
+            type.GetMethod("Maze", new[] { typeof(Grid), typeof(int) }).Invoke(null, new object[] { grid, (int)nudRNGSeed.Value });
 
-            
+            grid.Braid((double)nudBraid.Value);
 
             return true;
         }
@@ -98,9 +133,17 @@ namespace Maze
         private void ResetMaze(object sender, EventArgs e)
         {
             _grid = new Grid(MazeSize, MazeSize);
-            
-            pbMaze.Image = _grid.ToImg(GridSize, GridSize);
-            
+            if (pbMask.Image != null)
+            {
+                var mask = maze.Core.Mask.FromBitmap((Bitmap)pbMask.Image);
+                _grid = new MaskedGrid(mask);
+            }
+            pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset.Value);
+            if (cbAlgorithm.SelectedItem != null)
+            {
+                SetAlgorithm();
+            }
+            btnStep.Enabled = true;
             _startPoint = null;
             tsslStartPoint.Text = "Start: " + _startPoint;
             _endPoint = null;
@@ -111,16 +154,28 @@ namespace Maze
 
         private void SetAlgorithm()
         {
-            var algo = "BinaryTree";
+            var algo = (string)cbAlgorithm.SelectedItem;
 
             var type = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == algo);
-            _algorithm = (IMazeAlgorithm)Activator.CreateInstance(type, _grid, GridSize);
+            if (type == null)
+            {
+                MessageBox.Show("No algorithm type for " + algo);
+            }
+            if (pbMask.Image != null && type == typeof(BinaryTree))
+            {
+                MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
+            }
+            _algorithm = (IMazeAlgorithm)Activator.CreateInstance(type, _grid, (int)nudRNGSeed.Value);
         }
 
         private void StepMaze(object sender, EventArgs e)
         {
+            if (!_algorithm.Step())
+            {
+                btnStep.Enabled = false;
+            }
             _grid.ActiveCell = _algorithm.CurrentCell;
-            pbMaze.Image = _grid.ToImg(GridSize, GridSize);
+            pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset.Value);
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -141,8 +196,15 @@ namespace Maze
 
         private void btnColorize_Click(object sender, EventArgs e)
         {
-            
-                IColoredGrid colorGrid = new ColoredGrid(MazeSize, MazeSize);          
+            if (cbAlgorithm.SelectedItem != null)
+            {
+                IColoredGrid colorGrid = new ColoredGrid(MazeSize, MazeSize);
+                if (pbMask.Image != null)
+                {
+                    var mask = maze.Core.Mask.FromBitmap((Bitmap)pbMask.Image);
+                    colorGrid = new MaskedColoredGrid(mask);
+                }
+
                 if (!CreateSelectedMaze(colorGrid))
                 {
                     return;
@@ -150,7 +212,10 @@ namespace Maze
                 Cell start;
                 if (_startPoint.HasValue)
                     start = colorGrid[_startPoint.Value.Y, _startPoint.Value.X];
-                
+                else if (colorGrid is MaskedColoredGrid)
+                {
+                    start = colorGrid.RandomCell();
+                }
                 else
                 {
                     start = colorGrid[colorGrid.Rows / 2, colorGrid.Columns / 2];
@@ -159,17 +224,17 @@ namespace Maze
 
                 colorGrid.BackColor = pbColor.BackColor;
 
-                pbMaze.Image = colorGrid.ToImg(GridSize, GridSize);
-            
+                pbMaze.Image = colorGrid.ToImg(GridSize, (float)nudInset.Value);
+            }
         }
 
         private void btnDrawPath_Click(object sender, EventArgs e)
         {
-            if (_startPoint == null || _endPoint == null || _mode != MazeStyle.Square)
+            if (_startPoint == null || _endPoint == null || pbMask.Image != null || _mode != MazeStyle.Square)
             {
                 return;
             }
-            
+            if (cbAlgorithm.SelectedItem != null)
             {
                 var colorGrid = new ColoredPathGrid(MazeSize, MazeSize);
 
@@ -187,12 +252,48 @@ namespace Maze
 
                 colorGrid.BackColor = pbColor.BackColor;
 
-                pbMaze.Image = colorGrid.ToImg(GridSize, GridSize);
+                pbMaze.Image = colorGrid.ToImg(GridSize, (float)nudInset.Value);
             }
 
         }
 
-        
+        private void btnLongestPath_Click(object sender, EventArgs e)
+        {
+            if (cbAlgorithm.SelectedItem != null)
+            {
+                IPathGrid colorGrid = new ColoredPathGrid(MazeSize, MazeSize);
+                if (pbMask.Image != null)
+                {
+                    var mask = maze.Core.Mask.FromBitmap((Bitmap)pbMask.Image);
+                    colorGrid = new MaskedColoredPathGrid(mask);
+                }
+                if (!CreateSelectedMaze(colorGrid))
+                {
+                    return;
+                }
+                var start = colorGrid.RandomCell();
+                var distances = start.Distances;
+                var (newStart, distance) = distances.Max;
+                start = newStart;
+                distances = start.Distances;
+                var (end, distance2) = distances.Max;
+
+                _startPoint = start.Location;
+                tsslStartPoint.Text = "Start: " + _startPoint;
+
+                _endPoint = end.Location;
+                tsslEndPoint.Text = "End: " + _endPoint;
+
+                colorGrid.Distances = start.Distances;
+                colorGrid.Path = start.Distances.PathTo(end);
+
+                tsslPathLength.Text = "Path Length: " + colorGrid.PathLength;
+
+                colorGrid.BackColor = pbColor.BackColor;
+
+                pbMaze.Image = colorGrid.ToImg(GridSize, (float)nudInset.Value);
+            }
+        }
 
         private void btnAnimate_Click(object sender, EventArgs e)
         {
@@ -201,26 +302,125 @@ namespace Maze
             while (_algorithm.Step() && IsAnimating)
             {
                 _grid.ActiveCell = _algorithm.CurrentCell;
-                pbMaze.Image = _grid.ToImg(GridSize, GridSize);
+                pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset.Value);
 
                 Application.DoEvents();
                 Thread.Sleep(100);
             }
+            btnStep.Enabled = false;
             Cursor = Cursors.Default;
             IsAnimating = false;
         }
 
+        private void btnLoadMask_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pbMask.Image = Image.FromFile(openFileDialog1.FileName);
+                pbMaze.SizeMode = PictureBoxSizeMode.Zoom;
+                pbMaze.Dock = DockStyle.Fill;
+                ToggleDrawPathButton();
+            }
+            else
+            {
+                ClearMask();
+            }
+            ResetMaze(sender, e);
+        }
 
 
-    }
+        private void rbSquare_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbSquare.Checked)
+            {
+                _mode = MazeStyle.Square;
+                GridSize = 50;
+                ToggleDrawPathButton();
+
+            }
+            ToggleEnableMaskButton();
+            ResetMaze(sender, e);
+        }
+
+        private void ToggleEnableMaskButton()
+        {
+            if (_mode == MazeStyle.Square)
+            {
+                btnLoadMask.Enabled = true;
+            }
+            else
+            {
+                btnLoadMask.Enabled = false;
+            }
+        }
+
+        private void ClearMask()
+        {
+            pbMask.Image?.Dispose();
+            pbMask.Image = null;
+            pbMaze.SizeMode = PictureBoxSizeMode.AutoSize;
+            pbMaze.Dock = DockStyle.None;
+            ToggleDrawPathButton();
+        }
+
+        private void ToggleDrawPathButton()
+        {
+            if (_mode == MazeStyle.Square && pbMask.Image == null)
+            {
+                btnDrawPath.Enabled = true;
+            }
+            else
+            {
+                btnDrawPath.Enabled = false;
+            }
+        }
+    
 
     public enum MazeStyle
     {
         Square,
-        Polar,
-        Hex,
-        Triangle,
-        Upsilon,
-        Weave
+    }
+    private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(sender, e);
+            }
+        }
+
+        private Timer _timer;
+
+        public Stopwatch Stopwatch { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you want to save your progress?", "Confirmation", System.Windows.Forms.MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+            {
+                //string saveLocation = "1";
+                //TODO: Ask where to save
+
+                //n.Save(saveLocation);
+                var MainWin = new MainWindow();
+                MainWin.Show();
+                this.Close();
+
+            }
+            else
+            {
+                // Do not close the window  
+            }
+        }
+        private void Pause_Click(object sender, EventArgs e)
+        {
+           //TODO: actually pause timer
+
+        }
+        private void Exit_Click(object sender, EventArgs e)
+        {
+
+
+        }
     }
 }

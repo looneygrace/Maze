@@ -1,6 +1,6 @@
-namespace mazes.Algorithms {
-    using mazes.Core;
-    using mazes.Core.Cells;
+namespace maze.Algorithms {
+    using maze.Core;
+    using maze.Core.Cells;
 
     public interface IMazeAlgorithm {
         bool Step();

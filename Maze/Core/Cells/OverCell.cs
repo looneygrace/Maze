@@ -1,8 +1,8 @@
-﻿namespace mazes.Core.Cells {
+﻿namespace maze.Core.Cells {
     using System.Collections.Generic;
     using System.Linq;
 
-    using mazes.Core.Grids;
+    using maze.Core.Grids;
 
     public sealed class UnderCell : OverCell {
         public UnderCell(OverCell overCell) : base(overCell.Row, overCell.Column, null) {

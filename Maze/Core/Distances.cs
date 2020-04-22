@@ -1,8 +1,8 @@
-﻿namespace mazes.Core {
+﻿namespace maze.Core {
     using System.Collections.Generic;
     using System.Linq;
 
-    using mazes.Core.Cells;
+    using maze.Core.Cells;
 
     public class Distances {
         private Cell Root { get; }

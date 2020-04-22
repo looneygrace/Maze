@@ -1,5 +1,5 @@
-namespace mazes.Core.Grids.Cartesian {
-    using mazes.Core.Cells;
+namespace maze.Core.Grids.Cartesian {
+    using maze.Core.Cells;
 
     public class DistanceGrid : Grid {
         public Distances Distances { get; set; }

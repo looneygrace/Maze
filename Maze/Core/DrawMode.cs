@@ -1,4 +1,4 @@
-namespace mazes.Core {
+namespace maze.Core {
     public enum DrawMode {
         Background,
         Walls,

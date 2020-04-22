@@ -1,9 +1,9 @@
-namespace mazes.Core.Grids.Masked {
+namespace maze.Core.Grids.Masked {
     using System;
     using System.Linq;
 
-    using mazes.Core.Cells;
-    using mazes.Core.Grids.Cartesian;
+    using maze.Core.Cells;
+    using maze.Core.Grids.Cartesian;
 
     public class MaskedColoredGrid : ColoredGrid {
         public Mask Mask { get; }

@@ -1,4 +1,4 @@
-namespace mazes.Core.Grids.Interfaces {
+namespace maze.Core.Grids.Interfaces {
     using System.Drawing;
 
     public interface IColoredGrid: IGrid {

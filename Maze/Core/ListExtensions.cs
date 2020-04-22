@@ -1,6 +1,6 @@
 using System.Threading;
 
-namespace mazes.Core {
+namespace maze.Core {
     using System;
     using System.Collections.Generic;
 

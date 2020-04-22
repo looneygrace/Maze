@@ -1,4 +1,4 @@
-namespace mazes.Core {
+namespace maze.Core {
     using System.Drawing;
 
     public static class ColorExtensions {

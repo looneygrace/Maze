@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -43,6 +43,9 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
+    <Reference Include="ImageProcessor, Version=2.9.0.207, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageProcessor.2.9.0\lib\net452\ImageProcessor.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=2020.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.2020.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -61,6 +64,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -90,6 +96,28 @@
       <DependentUpon>PlayGameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Game.cs" />
+    <Compile Include="Algorithms\BinaryTree.cs" />
+    <Compile Include="Core\Cells\CartesianCell.cs" />
+    <Compile Include="Core\Cells\Cell.cs" />
+    <Compile Include="Core\Cells\OverCell.cs" />
+    <Compile Include="Core\Grids\WeaveGrid.cs" />
+    <Compile Include="Core\Grids\Cartesian\ColoredGrid.cs" />
+    <Compile Include="Core\Grids\Cartesian\ColoredPathGrid.cs" />
+    <Compile Include="Core\ColorExtensions.cs" />
+    <Compile Include="Core\Grids\Cartesian\DistanceGrid.cs" />
+    <Compile Include="Core\Distances.cs" />
+    <Compile Include="Core\DrawMode.cs" />
+    <Compile Include="Core\Grids\Cartesian\Grid.cs" />
+    <Compile Include="Algorithms\IMazeAlgorithm.cs" />
+    <Compile Include="Core\Grids\Interfaces\IColoredGrid.cs" />
+    <Compile Include="Core\Grids\Interfaces\IGrid.cs" />
+    <Compile Include="Core\IntExtensions.cs" />
+    <Compile Include="Core\Grids\Interfaces\IPathGrid.cs" />
+    <Compile Include="Core\ListExtensions.cs" />
+    <Compile Include="Core\Mask.cs" />
+    <Compile Include="Core\Grids\Masked\MaskedGrid.cs" />
+    <Compile Include="Core\Grids\Masked\MaskedColoredGrid.cs" />
+    <Compile Include="Core\Grids\Masked\MaskedColoredPathGrid.cs" />
     <Compile Include="HighScores.xaml.cs">
       <DependentUpon>HighScores.xaml</DependentUpon>
     </Compile>

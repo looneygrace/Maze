@@ -1,8 +1,8 @@
-﻿namespace mazes.Core.Grids.Cartesian {
+﻿namespace maze.Core.Grids.Cartesian {
     using System.Drawing;
 
-    using mazes.Core.Cells;
-    using mazes.Core.Grids.Interfaces;
+    using maze.Core.Cells;
+    using maze.Core.Grids.Interfaces;
 
     public class ColoredPathGrid : ColoredGrid, IPathGrid {
         public ColoredPathGrid(int rows, int cols) : base(rows, cols) { }
