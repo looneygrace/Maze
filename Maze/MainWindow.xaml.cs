@@ -30,7 +30,6 @@ namespace Maze
         {
             MazeForm NewGame = new MazeForm();
             NewGame.Show();
-            this.Close();
         }
 
         private void Load_Game_Click(object sender, RoutedEventArgs e)

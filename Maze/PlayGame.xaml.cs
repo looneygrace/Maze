@@ -55,7 +55,6 @@ namespace Maze
         public Stopwatch Stopwatch { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private int Xmin, Ymin, CellWid, CellHgt;
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {

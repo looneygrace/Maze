@@ -17,16 +17,10 @@ namespace Maze
     {
 
         private int score;//the score of the player
-        private int GridSize = 50;
+        
         private const int MazeSize = 11;
         private Grid _grid;
-        private IMazeAlgorithm _algorithm;
-        private Point? _tempPoint;
-        private Point? _startPoint;
-        private Point? _endPoint;
-
-        private bool IsAnimating;
-        private MazeStyle _mode;
+        
         int[,] maze;//the 2d array that holds the maze
         int positionHeight, positionWidth;// Where the player starts out
 

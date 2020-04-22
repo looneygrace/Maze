@@ -402,22 +402,15 @@ namespace Maze
 
         public virtual Cell this[int row, int column]
         {
-
             get
             {
-
                 if (row < 0 || row >= Rows)
                 {
-
                     return null;
-
                 }
-
                 if (column < 0 || column >= Columns)
                 {
-
                     return null;
-
                 }
 
                 return _grid[row][column];
@@ -639,237 +632,33 @@ namespace Maze
 
         public virtual Image ToImg(int cellSize = 50, float insetPrc = 0.0f)
         {
-
             var width = cellSize * Columns;
-
             var height = cellSize * Rows;
-
-            var inset = (int)(cellSize * insetPrc);
-
-
-
+            var inset = (int)(cellSize * 0);      
             var img = new Bitmap(width, height);
-
             using (var g = Graphics.FromImage(img))
             {
-
                 g.Clear(Color.Transparent);
-
                 foreach (var mode in new[] { DrawMode.Background, DrawMode.Walls, DrawMode.Path, })
                 {
-
-
-
-
-
+                   
                     foreach (var cell in Cells.Cast<CartesianCell>())
                     {
-
                         var x = cell.Column * cellSize;
-
-                        var y = cell.Row * cellSize;
-
-
-
-                        if (inset > 0)
-                        {
-
-                            ToImgWithInset(g, cell, mode, cellSize, x, y, inset);
-
-                        }
-                        else
-                        {
+                        var y = cell.Row * cellSize;                      
 
                             ToImgWithoutInset(g, cell, mode, cellSize, x, y);
-
-                        }
-
+                        
                     }
-
                 }
-
             }
-
-
-
-
-
             return img;
-
         }
-
-
-
         protected virtual void ToImgWithInset(Graphics g, CartesianCell cell, DrawMode mode, int cellSize, int x, int y, int inset)
         {
-
-            var (x1, x2, x3, x4, y1, y2, y3, y4) = CellCoordinatesWithInset(x, y, cellSize, inset);
-
-
-
-            if (mode == DrawMode.Background)
-            {
-
-                var color = BackgroundColorFor(cell);
-
-                if (color != null)
-                {
-
-                    // fill center
-
-                    var brush = new SolidBrush(color.GetValueOrDefault());
-
-                    g.FillRectangle(brush, x2, y2, cellSize - inset * 2, cellSize - inset * 2);
-
-
-
-                    if (cell.IsLinked(cell.North))
-                    {
-
-                        g.FillRectangle(brush, x2, y1, cellSize - 2 * inset, inset);
-
-                    }
-
-                    if (cell.IsLinked(cell.South))
-                    {
-
-                        g.FillRectangle(brush, x2, y3, cellSize - 2 * inset, inset);
-
-                    }
-
-                    if (cell.IsLinked(cell.West))
-                    {
-
-                        g.FillRectangle(brush, x1, y2, inset, cellSize - 2 * inset);
-
-                    }
-
-                    if (cell.IsLinked(cell.East))
-                    {
-
-                        g.FillRectangle(brush, x3, y2, inset, cellSize - 2 * inset);
-
-                    }
-
-                }
-
-            }
-            else if (mode == DrawMode.Walls)
-            {
-
-                if (cell.IsLinked(cell.North))
-                {
-
-                    g.DrawLine(Pens.Black, x2, y1, x2, y2);
-
-                    g.DrawLine(Pens.Black, x3, y1, x3, y2);
-
-                }
-                else
-                {
-
-                    g.DrawLine(Pens.Black, x2, y2, x3, y2);
-
-                }
-
-                if (cell.IsLinked(cell.South))
-                {
-
-                    g.DrawLine(Pens.Black, x2, y3, x2, y4);
-
-                    g.DrawLine(Pens.Black, x3, y3, x3, y4);
-
-                }
-                else
-                {
-
-                    g.DrawLine(Pens.Black, x2, y3, x3, y3);
-
-                }
-
-
-
-                if (cell.IsLinked(cell.West))
-                {
-
-                    g.DrawLine(Pens.Black, x1, y2, x2, y2);
-
-                    g.DrawLine(Pens.Black, x1, y3, x2, y3);
-
-                }
-                else
-                {
-
-                    g.DrawLine(Pens.Black, x2, y2, x2, y3);
-
-                }
-
-                if (cell.IsLinked(cell.East))
-                {
-
-                    g.DrawLine(Pens.Black, x3, y2, x4, y2);
-
-                    g.DrawLine(Pens.Black, x3, y3, x4, y3);
-
-                }
-                else
-                {
-
-                    g.DrawLine(Pens.Black, x3, y2, x3, y3);
-
-                }
-
-
-
-                if (cell == ActiveCell)
-                {
-
-                    g.FillRectangle(Brushes.GreenYellow, x2 + 1, y2 + 1, cellSize - inset * 2 - 2, cellSize - inset * 2 - 2);
-
-                }
-
-
-
-            }
-            else if (mode == DrawMode.Path)
-            {
-
-                DrawPath(cell, g, cellSize);
-
-            }
-
+            Console.WriteLine("ERRROR");
         }
-
-
-
-        protected (int x1, int x2, int x3, int x4, int y1, int y2, int y3, int y4) CellCoordinatesWithInset(int x, int y, int cellSize, int inset)
-        {
-
-            var x1 = x;
-
-            var x4 = x + cellSize;
-
-            var x2 = x1 + inset;
-
-            var x3 = x4 - inset;
-
-
-
-            var y1 = y;
-
-            var y4 = y + cellSize;
-
-            var y2 = y1 + inset;
-
-            var y3 = y4 - inset;
-
-            return (x1, x2, x3, x4, y1, y2, y3, y4);
-
-        }
-
-
-
-        private void ToImgWithoutInset(Graphics g, CartesianCell cell, DrawMode mode, int cellSize, int x, int y)
+                private void ToImgWithoutInset(Graphics g, CartesianCell cell, DrawMode mode, int cellSize, int x, int y)
         {
             var x1 = x;
             var y1 = y;
@@ -971,32 +760,20 @@ namespace Maze
 
         public List<Cell> Deadends()
         {
-
             return Cells.Where(c => c.Links.Count == 1).ToList();
-
         }
-
-
 
         public void Braid(double p = 1.0f)
         {
-
             var rand = new Random();
-
             foreach (var cell in Deadends().Shuffle())
             {
-
                 if (cell.Links.Count != 1 || rand.NextDouble() > p)
                 {
-
                     continue;
-
                 }
-
                 var neighbors = cell.Neighbors.Where(n => !cell.IsLinked(n)).ToList();
-
                 var best = neighbors.Where(n => n.Links.Count == 1).ToList();
-
                 if (!best.Any())
                 {
                     best = neighbors;
@@ -1006,54 +783,27 @@ namespace Maze
                     }
 
                 }
-
                 var neighbor = best.Sample(rand);
-
                 cell.Link(neighbor);
-
             }
-
         }
-
-
     }
     public class Distances
     {
-
         private Cell Root { get; }
-
         private readonly Dictionary<Cell, int> _cells;
-
         public List<Cell> Cells => _cells.Keys.ToList();
-
-
-
         public Distances(Cell root)
         {
-
             Root = root;
-
-            _cells = new Dictionary<Cell, int> {
-
-                {Root, 0 }
-
-            };
-
+            _cells = new Dictionary<Cell, int> {{Root, 0 }};
         }
-
-
-
         public int this[Cell cell]
-        {
-
-            get
-            {
-
+        {get{
                 if (_cells.ContainsKey(cell))
                 {
-
                     return _cells[cell];
-
+                    
                 }
 
                 return -1;
@@ -1086,44 +836,27 @@ namespace Maze
 
             while (current != Root)
             {
-
                 foreach (var neighbor in current.Links)
                 {
-
                     if (_cells[neighbor] < _cells[current])
                     {
-
                         breadcrumbs[neighbor] = _cells[neighbor];
-
                         current = neighbor;
-
                         break;
-
                     }
-
                 }
-
             }
-
             return breadcrumbs;
-
         }
-
-
 
         public (Cell maxCell, int maxDistance) Max
         {
-
             get
             {
-
                 var maxDistance = 0;
-
                 var maxCell = Root;
-
                 foreach (var cell in _cells)
-                {
-
+                { 
                     if (cell.Value > maxDistance)
                     {
 

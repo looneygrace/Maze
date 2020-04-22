@@ -33,14 +33,14 @@ namespace Maze
 
         public MazeForm()
         {
-            Console.WriteLine("HEY");
-            //InitializeComponent();
+
+            InitializeComponent();
             _grid = new Grid(MazeSize, MazeSize);
-            pbMaze.Image = _grid.ToImg(GridSize, GridSize);
+            pbMaze.Image = _grid.ToImg(GridSize, 0);
             var it = typeof(IMazeAlgorithm);
             var algoNames = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes())
                 .Where(t => it.IsAssignableFrom(t) && t.IsClass).Select(t => t.Name).ToArray();
-            
+    
             SetAlgorithm();
 
             tsmiPickStart.Click += TsmiPickStartOnClick;
@@ -75,10 +75,7 @@ namespace Maze
             
             Image img;
             var grid = new Grid(MazeSize, MazeSize);
-            if (!CreateSelectedMaze(grid))
-            {
-                return;
-            }
+            
             img = grid.ToImg(GridSize, GridSize);
             pbMaze.Image = img;
             
