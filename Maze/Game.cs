@@ -18,10 +18,6 @@ namespace Maze
 
         private int score;//the score of the player
         
-        private const int MazeSize = 11;
-        private Grid _grid;
-        
-        int[,] maze;//the 2d array that holds the maze
         int positionHeight, positionWidth;// Where the player starts out
 
         int mazeWidth, mazeHeight;//the dimensions of the maze
