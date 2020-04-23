@@ -210,7 +210,8 @@ namespace Maze
             this.tsslPathLength.Name = "tsslPathLength";
             this.tsslPathLength.Size = new System.Drawing.Size(93, 20);
             this.tsslPathLength.Text = "Path Length: ";
-            move += new KeyPressEventHandler(Window_KeyUp);
+            this.KeyDown += new KeyEventHandler(Window_KeyUp);
+            this.KeyUp += new KeyEventHandler(Window_KeyUp);
             // 
             // label4
             // 
@@ -494,7 +495,6 @@ namespace Maze
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btnPickColor;
-        private KeyPressEventHandler move;
        
        
         
@@ -523,7 +523,7 @@ namespace Maze
         private System.Windows.Forms.RadioButton rbWeave;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Timer timer1;
-
+        private System.Windows.Forms.Keys move;
 
     }
     }

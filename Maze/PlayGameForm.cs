@@ -27,8 +27,10 @@ namespace Maze
     using ImageProcessor.Processors;
     using maze.Core.Grids.Masked;
     using Mask = maze.Core.Mask;
+    using System.Windows.Input;
+    using Cursors = System.Windows.Forms.Cursors;
 
-    public partial class MazeForm : Form, INotifyPropertyChanged
+    public partial class MazeForm : Form
     {
         private int GridSize = 50;
         private const int MazeSize = 11;
@@ -40,7 +42,8 @@ namespace Maze
         private Random nudRNGSeed;
         private bool IsAnimating;
         private MazeStyle _mode;
-        CartesianCell currentCell;
+        CartesianCell originalPosition;
+
         public MazeForm()
         {
             InitializeComponent();
@@ -94,7 +97,7 @@ namespace Maze
             tsslStartPoint.Text = "Start: " + _startPoint;
         }
 
-        private void pbMaze_MouseDown(object sender, MouseEventArgs e)
+        private void pbMaze_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -315,7 +318,7 @@ namespace Maze
 
         private void btnAnimate_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
+            Cursor = System.Windows.Forms.Cursors.WaitCursor;
             IsAnimating = true;
             while (_algorithm.Step() && IsAnimating)
             {
@@ -398,49 +401,38 @@ namespace Maze
     {
         Square,
     }
-        private void Window_KeyUp(object sender, KeyPressEventArgs e)
+        private void Window_KeyUp(object sender, EventArgs e)
         {
-            char x = e.KeyChar;
-            CartesianCell orginalPostition = this.currentCell;
-            switch (x)
+            CartesianCell newCell;
+            Console.WriteLine("Hey");
+            if (Keyboard.IsKeyDown(Key.Down))
             {
-                case 'd':
-                    Console.WriteLine("HEY");
-                    CartesianCell newCell = orginalPostition.East;
-                    if (_grid.isWall(orginalPostition, newCell) != true)
-                        _grid.moveCharacter("East",orginalPostition,newCell);
-                    break;
-                case 'a':
-                    newCell = orginalPostition.West;
-                    if (_grid.isWall(orginalPostition, newCell) != true)
-                        _grid.moveCharacter("West",orginalPostition,newCell);
-                    break;
-                case 's':
-                    newCell = orginalPostition.South;
-                    if (_grid.isWall(orginalPostition, newCell) != true)
-                        _grid.moveCharacter("South",orginalPostition, newCell);
-                    break;
-                case 'w':
-                    newCell = orginalPostition.North;
-                    if (_grid.isWall(orginalPostition, newCell) != true)
-                        _grid.moveCharacter("North",orginalPostition,newCell);
-                    break;
+                newCell = originalPosition.North;
+                if (_grid.isWall(originalPosition, newCell) != true)
+                    _grid.moveCharacter("North", originalPosition, newCell);
+            }
+            if (Keyboard.IsKeyDown(Key.Up))
+            {
+                newCell = originalPosition.North;
+                if (_grid.isWall(originalPosition, newCell) != true)
+                    _grid.moveCharacter("North", originalPosition, newCell);
+            }
+            if (Keyboard.IsKeyDown(Key.Left))
+            {
+                newCell = originalPosition.East;
+                if (_grid.isWall(originalPosition, newCell) != true)
+                    _grid.moveCharacter("East", originalPosition, newCell);
+            }
+            if (Keyboard.IsKeyDown(Key.Right))
+            {
+                newCell = originalPosition.South;
+                if (_grid.isWall(originalPosition, newCell) != true)
+                    _grid.moveCharacter("South", originalPosition, newCell);
+            }
+           
                 
             }
-        }
-        private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(sender, e);
-            }
-        }
-
-        private Timer _timer;
-
-        public Stopwatch Stopwatch { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         private void Save_Click(object sender, EventArgs e)
         {
