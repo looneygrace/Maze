@@ -37,7 +37,7 @@ namespace Maze
         private Point? _tempPoint;
         private Point? _startPoint;
         private Point? _endPoint;
-
+        private Random nudRNGSeed;
         private bool IsAnimating;
         private MazeStyle _mode;
 
@@ -47,6 +47,7 @@ namespace Maze
             float nudInset = 0;
             _grid = new Grid(MazeSize, MazeSize);
             pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
+            nudRNGSeed = new Random();
             
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
@@ -118,8 +119,8 @@ namespace Maze
             {
                 MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
             }
-
-            type.GetMethod("Maze", new[] { typeof(Grid), typeof(int) }).Invoke(null, new object[] { grid, (int)nudRNGSeed.Value });
+            int rand = nudRNGSeed.Next();
+            type.GetMethod("Maze", new[] { typeof(Grid), typeof(int) }).Invoke(null, new object[] { grid, rand});
 
             grid.Braid((double)nudBraid.Value);
 
@@ -161,7 +162,9 @@ namespace Maze
             {
                 MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
             }
-            _algorithm = (IMazeAlgorithm)Activator.CreateInstance(type, _grid, (int)nudRNGSeed.Value);
+            int rand = nudRNGSeed.Next();
+
+            _algorithm = (IMazeAlgorithm)Activator.CreateInstance(type, _grid, rand);
         }
 
         private void StepMaze(object sender, EventArgs e)

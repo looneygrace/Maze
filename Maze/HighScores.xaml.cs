@@ -22,12 +22,27 @@ namespace Maze
         public HighScores()
         {
             InitializeComponent();
+            ReadHighScores();
         }
         private void Home_Click(object sender, RoutedEventArgs e)
         {
             var Main = new MainWindow();
             Main.Show();
             this.Close();
+        }
+        private void ReadHighScores()
+        {
+            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\loone\source\repos\Maze\Maze\HighScores.txt");
+            
+            int i = 0;
+            foreach (string line in lines)
+            {
+                string[] player = lines[i].Split(' ');
+                Names.Text += player[0] + "\n";
+                Scores.Text += player[1] + "\n";
+                i++;
+            }
+
         }
     }
 }

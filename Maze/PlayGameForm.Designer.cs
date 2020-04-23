@@ -45,8 +45,6 @@
             this.btnPickColor = new System.Windows.Forms.Button();
             this.pbColor = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.nudRNGSeed = new System.Windows.Forms.NumericUpDown();
             this.btnDraw = new System.Windows.Forms.Button();
             this.btnStep = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
@@ -77,7 +75,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudRNGSeed)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaze)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +92,6 @@
             this.splitContainer1.Panel1.Controls.Add(this.nudInset);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.nudBraid);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.pbMask);
             this.splitContainer1.Panel1.Controls.Add(this.btnLoadMask);
             this.splitContainer1.Panel1.Controls.Add(this.btnAnimate);
@@ -105,12 +101,11 @@
             this.splitContainer1.Panel1.Controls.Add(this.btnPickColor);
             this.splitContainer1.Panel1.Controls.Add(this.pbColor);
             this.splitContainer1.Panel1.Controls.Add(this.btnSave);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.nudRNGSeed);
             this.splitContainer1.Panel1.Controls.Add(this.btnDraw);
             this.splitContainer1.Panel1.Controls.Add(this.btnStep);
             this.splitContainer1.Panel1.Controls.Add(this.btnReset);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.cbAlgorithm);
             // 
             // splitContainer1.Panel2
@@ -307,30 +302,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Location = new System.Drawing.Point(17, 196);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 17);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Seed";
-            // 
-            // nudRNGSeed
-            // 
-            this.nudRNGSeed.Location = new System.Drawing.Point(17, 215);
-            this.nudRNGSeed.Margin = new System.Windows.Forms.Padding(4);
-            this.nudRNGSeed.Maximum = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.nudRNGSeed.Name = "nudRNGSeed";
-            this.nudRNGSeed.Size = new System.Drawing.Size(160, 22);
-            this.nudRNGSeed.TabIndex = 4;
-            // 
             // btnDraw
             // 
             this.btnDraw.Location = new System.Drawing.Point(16, 406);
@@ -521,7 +492,6 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudRNGSeed)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbMaze)).EndInit();
@@ -538,8 +508,6 @@
             private System.Windows.Forms.ComboBox cbAlgorithm;
             private System.Windows.Forms.PictureBox pbMaze;
             private System.Windows.Forms.Button btnDraw;
-            private System.Windows.Forms.Label label2;
-            private System.Windows.Forms.NumericUpDown nudRNGSeed;
             private System.Windows.Forms.Button btnSave;
             private System.Windows.Forms.SaveFileDialog saveFileDialog1;
             private System.Windows.Forms.Button btnPickColor;
