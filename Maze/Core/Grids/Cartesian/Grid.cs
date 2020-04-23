@@ -172,7 +172,7 @@
                     {
                         var x = cell.Column * cellSize;
                         var y = cell.Row * cellSize;
-
+                        Console.WriteLine("hey");
                         if (inset > 0)
                         {
                             ToImgWithInset(g, cell, mode, cellSize, x, y, inset);

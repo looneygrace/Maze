@@ -26,7 +26,8 @@ namespace Maze
     using Timer = System.Threading.Timer;
     using ImageProcessor.Processors;
     using maze.Core.Grids.Masked;
-    
+    using Mask = maze.Core.Mask;
+
     public partial class MazeForm : Form, INotifyPropertyChanged
     {
         private int GridSize = 50;
@@ -46,14 +47,7 @@ namespace Maze
             float nudInset = 0;
             _grid = new Grid(MazeSize, MazeSize);
             pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
-            var it = typeof(IMazeAlgorithm);
-            var algoNames = AppDomain.CurrentDomain.GetAssemblies().SelectMany(s => s.GetTypes())
-                .Where(t => it.IsAssignableFrom(t) && t.IsClass).Select(t => t.Name).ToArray();
-            cbAlgorithm.Items.AddRange(algoNames);
-
-            cbAlgorithm.SelectedIndex = 0;
-            SetAlgorithm();
-
+            
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
             pbMask.Image = null;
@@ -90,13 +84,14 @@ namespace Maze
 
         private void DrawMaze(object sender, EventArgs e)
         {
+            cbAlgorithm.SelectedItem = cbAlgorithm.Items[0];
             if (cbAlgorithm.SelectedItem != null)
             {
                 Image img;
                 var grid = new Grid(MazeSize, MazeSize);
                 if (pbMask.Image != null)
                 {
-                    var mask = maze.Core.Mask.FromBitmap((Bitmap)pbMask.Image);
+                    var mask = Mask.FromBitmap((Bitmap)pbMask.Image);
                     grid = new MaskedGrid(mask);
                 }
                 if (!CreateSelectedMaze(grid))
@@ -105,7 +100,8 @@ namespace Maze
                 }
                 img = grid.ToImg(GridSize, (float)nudInset.Value);
                 pbMaze.Image = img;
-            }
+           
+        }
         }
 
         private bool CreateSelectedMaze(IGrid grid)
