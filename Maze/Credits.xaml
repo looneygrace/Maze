@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="Credits" Height="450" Width="800">
     <Grid>
-        <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click"/>
+        <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click" />
+        <TextBlock HorizontalAlignment="center" TextWrapping="Wrap" Text="Credits" VerticalAlignment="Top" Margin="295,76,301.6,0" FontSize="30" TextAlignment="Center" Width="197"/>
+        <TextBlock HorizontalAlignment="center" TextWrapping="Wrap" Text="Grace Looney, Matthew Pugh" VerticalAlignment="Center" FontSize="30"/>
     </Grid>
 </Window>
