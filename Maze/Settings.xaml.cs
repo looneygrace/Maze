@@ -38,9 +38,17 @@ namespace Maze
             BlueFloor.Text = "0";
             MusicFileName = "Nothing";
             sound = new MediaPlayer();
+            
             //sound.PlayLooping();
         }
-//custom colors
+        //custom colors
+        private void updateBackground(string background)
+        {
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(background, UriKind.Relative));
+            this.Background = myBrush;
+        }
         private void Floor_TextChanged(object sender, EventArgs e)
         {
 
@@ -242,6 +250,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
+            updateBackground("../../brick.jpg");
         }
 
         private void ShrubTheme_Checked(object sender, RoutedEventArgs e)
@@ -251,6 +260,7 @@ namespace Maze
             Shrub.IsChecked = true;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
+            updateBackground("../../shrub.jpg");
         }
 
         private void DungeonTheme_Checked(object sender, RoutedEventArgs e)
@@ -260,6 +270,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = true;
             Custom.IsChecked = false;
+            updateBackground("../../dungeon.jpg");
         }
 
         private void StoneTheme_Checked(object sender, RoutedEventArgs e)
@@ -269,6 +280,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
+            updateBackground("../../stone.jpg");
         }
 
         private void CustomTheme_Checked(object sender, RoutedEventArgs e)
@@ -278,7 +290,6 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = true;
-            //TODO: Unselect All
             //TODO: Get Values from custom panel
 
         }
