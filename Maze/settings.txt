@@ -1,2 +1,2 @@
-../../stone.jpg
-../../../music/CreepyMusic.mp3
+../../shrub.jpg
+../../../music/HappyMusic.wav

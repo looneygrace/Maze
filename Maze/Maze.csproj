@@ -197,6 +197,9 @@
   <ItemGroup>
     <Resource Include="bonus.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="character.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.UI.Xaml.2.4.0-prerelease.200322001\build\Microsoft.UI.Xaml.targets" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.4.0-prerelease.200322001\build\Microsoft.UI.Xaml.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

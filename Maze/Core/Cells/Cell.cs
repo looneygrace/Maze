@@ -66,11 +66,16 @@
                 return distances;
             }
         }
-        public bool containsBonus()
+        public bool containsBonus(int seed)
         {
-            Random random = new Random();
-            int x = random.Next(0, 11 * 11);
-            if(x == 0 || x == 1)
+            Random random = new Random(seed);
+            
+            int x = random.Next(0, 20);
+            seed = x;
+            random = new Random(seed);
+            x = random.Next(0, 20);
+            Console.WriteLine(x);
+            if(x < 5 )
             {
                 Console.WriteLine("hey true");
                 return true;

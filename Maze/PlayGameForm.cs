@@ -40,15 +40,16 @@ namespace Maze
         private Random nudRNGSeed;
         private bool IsAnimating;
         private MazeStyle _mode;
-
+        CartesianCell currentCell;
         public MazeForm()
         {
             InitializeComponent();
+            
             float nudInset = 0;
             _grid = new Grid(MazeSize, MazeSize);
             pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
             nudRNGSeed = new Random();
-
+            
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
             pbMask.Image = null;
@@ -67,7 +68,9 @@ namespace Maze
                     return;
                 }
                 img = grid.ToImg(GridSize, (float)nudInset);
+                
                 pbMaze.Image = img;
+
             }
         }
 
@@ -395,7 +398,36 @@ namespace Maze
     {
         Square,
     }
-    private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Window_KeyUp(object sender, KeyPressEventArgs e)
+        {
+            char x = e.KeyChar;
+            CartesianCell orginalPostition = this.currentCell;
+            switch (x)
+            {
+                case 'd':
+                    CartesianCell newCell = orginalPostition.East;
+                    if (_grid.isWall(orginalPostition, newCell) != true)
+                        _grid.moveCharacter("East",orginalPostition,newCell);
+                    break;
+                case 'a':
+                    newCell = orginalPostition.West;
+                    if (_grid.isWall(orginalPostition, newCell) != true)
+                        _grid.moveCharacter("West",orginalPostition,newCell);
+                    break;
+                case 's':
+                    newCell = orginalPostition.South;
+                    if (_grid.isWall(orginalPostition, newCell) != true)
+                        _grid.moveCharacter("South",orginalPostition, newCell);
+                    break;
+                case 'w':
+                    newCell = orginalPostition.North;
+                    if (_grid.isWall(orginalPostition, newCell) != true)
+                        _grid.moveCharacter("North",orginalPostition,newCell);
+                    break;
+                
+            }
+        }
+        private void FirePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (this.PropertyChanged != null)
             {
