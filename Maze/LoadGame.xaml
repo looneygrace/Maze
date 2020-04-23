@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="LoadGame" Height="450" Width="800">
     <Grid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="387" Margin="30,14,0,0" Stroke="Black" VerticalAlignment="Top" Width="732" Name ="fl"/>
         <Button Content="Game 1" HorizontalAlignment="Left" VerticalAlignment="Center" Width="150" Margin="100,0,0,0" Height="150" Click="Game1"/>
         <Button Content="Game 2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="150" Margin="0,0,0,0" Height="150" Click="Game2"/>
         <Button Content="Game 3" HorizontalAlignment="Right" VerticalAlignment="Center" Width="150" Margin="0,0,100,0" Height="150" Click="Game3"/>

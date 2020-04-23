@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800">
     <Grid>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="387" Margin="30,14,0,0" Stroke="Black" VerticalAlignment="Top" Width="732" Name ="Back"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="387" Margin="30,14,0,0" Stroke="Black" VerticalAlignment="Top" Width="732" Name ="fl"/>
 
         <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click"/>
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Themes" VerticalAlignment="Top" TextAlignment="Center" FontSize="25                    " Margin="50,23,0,0" Width="170"/>

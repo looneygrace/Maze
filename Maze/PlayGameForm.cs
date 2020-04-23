@@ -434,8 +434,9 @@ namespace Maze
         }
         private void Exit_Click(object sender, EventArgs e)
         {
-
-
+            var MainWin = new MainWindow();
+            MainWin.Show();
+            this.Close();
         }
     }
 }

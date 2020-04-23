@@ -5,7 +5,7 @@
     using System.Drawing;
     using System.Linq;
     using System.Text;
-
+    using System.Windows.Media.Imaging;
     using JetBrains.Annotations;
     using maze.Core.Cells;
     using maze.Core.Grids.Interfaces;
@@ -172,7 +172,6 @@
                     {
                         var x = cell.Column * cellSize;
                         var y = cell.Row * cellSize;
-                        Console.WriteLine("hey");
                         if (inset > 0)
                         {
                             ToImgWithInset(g, cell, mode, cellSize, x, y, inset);
@@ -201,22 +200,47 @@
                     // fill center
                     var brush = new SolidBrush(color.GetValueOrDefault());
                     g.FillRectangle(brush, x2, y2, cellSize - inset * 2, cellSize - inset * 2);
-
+                    Console.WriteLine("REached");
                     if (cell.IsLinked(cell.North))
                     {
                         g.FillRectangle(brush, x2, y1, cellSize - 2 * inset, inset);
+                        if (cell.containsBonus() == true)
+                        {
+                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
+                            Point p = new Point(x2, y1);
+                            g.DrawIcon(icon: bonus, x2, y1);
+                        }
+
                     }
                     if (cell.IsLinked(cell.South))
                     {
                         g.FillRectangle(brush, x2, y3, cellSize - 2 * inset, inset);
+                        if (cell.containsBonus() == true)
+                        {
+                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
+                            Point p = new Point(x2, y3);
+                            g.DrawIcon(icon: bonus, x2, y3);
+                        }
                     }
                     if (cell.IsLinked(cell.West))
                     {
                         g.FillRectangle(brush, x1, y2, inset, cellSize - 2 * inset);
+                        if (cell.containsBonus() == true)
+                        {
+                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
+                            Point p = new Point(x1, y2);
+                            g.DrawIcon(icon: bonus, x1, y2);
+                        }
                     }
                     if (cell.IsLinked(cell.East))
                     {
                         g.FillRectangle(brush, x3, y2, inset, cellSize - 2 * inset);
+                        if (cell.containsBonus() == true)
+                        {
+                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
+                            Point p = new Point(x3, y2);
+                            g.DrawIcon(icon: bonus, x3, y2);
+                        }
                     }
                 }
             }

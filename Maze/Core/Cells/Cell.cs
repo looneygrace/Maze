@@ -1,4 +1,5 @@
 ﻿namespace maze.Core.Cells {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -65,7 +66,24 @@
                 return distances;
             }
         }
+        public bool containsBonus()
+        {
+            Random random = new Random();
+            int x = random.Next(0, 11 * 11);
+            if(x == 0 || x == 1)
+            {
+                Console.WriteLine("hey true");
+                return true;
+                
+            }
+            else
+            {
+                Console.WriteLine("hey false", x);
+                return false;
+            }
 
+
+        }
         public Distances WeightedDistances {
             get {
                 var weights = new Distances(this);

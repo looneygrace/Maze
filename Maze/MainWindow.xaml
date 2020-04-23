@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="387" Margin="30,14,0,0" Stroke="Black" VerticalAlignment="Top" Width="732" Name ="fl"/>
         <TextBlock HorizontalAlignment="Left" TextAlignment="Center" Height="325" FontSize="70
                    " Margin="132,54,0,0" TextWrapping="Wrap" FontFamily="Times New Roman" FontWeight="ExtraBold" Background="DimGray" Text="MAZE" VerticalAlignment="Top" Width="86"/>
         <Button Content="New Game" HorizontalAlignment="Left" FontSize="40" FontFamily="Times New Roman" VerticalAlignment="Top" Width="350" Margin="350,20,0,0" Height="60" Click ="New_Game_Click"/>

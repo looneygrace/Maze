@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="HighScores" Height="450" Width="800">
     <Grid>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="387" Margin="30,14,0,0" Stroke="Black" VerticalAlignment="Top" Width="732" Name ="fl"/>
         <Button Content="Home" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="666,367,0,0" Click="Home_Click"/>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="High Scores" VerticalAlignment="Stretch" TextElement.FontSize ="50" Margin="250,50,234.6,0" Width="309" />
         <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Names" VerticalAlignment="Top" Margin="125,125,0,0" TextElement.FontSize ="25"/>
