@@ -210,7 +210,7 @@ namespace Maze
             this.tsslPathLength.Name = "tsslPathLength";
             this.tsslPathLength.Size = new System.Drawing.Size(93, 20);
             this.tsslPathLength.Text = "Path Length: ";
-            move += new KeyPressEventHandler( Window_KeyUp);
+            move += new KeyPressEventHandler(Window_KeyUp);
             // 
             // label4
             // 

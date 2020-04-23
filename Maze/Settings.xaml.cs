@@ -203,10 +203,9 @@ namespace Maze
         private void NoMusic_Uncheck(object sender, RoutedEventArgs e)
         {
             if (sound != null)
-
             {
                 sound.Stop();
-                            }
+            }
             CreepyMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
             SpaceMusic.IsChecked = false;
@@ -215,7 +214,7 @@ namespace Maze
 
         private void CreepyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if(NoMusic.IsChecked != true)
+            if (sound != null)
             {
                 sound.Stop();
             }
@@ -229,7 +228,8 @@ namespace Maze
 
         private void GardenMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if (NoMusic.IsChecked != true)
+
+            if (sound != null)
             {
                 sound.Stop();
             }
@@ -244,7 +244,8 @@ namespace Maze
 
         private void HappyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if (NoMusic.IsChecked != true)
+
+            if (sound != null)
             {
                 sound.Stop();
             }
@@ -258,7 +259,8 @@ namespace Maze
 
         private void SpaceMusic_UnCheck(object sender, RoutedEventArgs e)
         {
-            if (NoMusic.IsChecked != true)
+
+            if (sound != null)
             {
                 sound.Stop();
             }

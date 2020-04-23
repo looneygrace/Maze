@@ -16,12 +16,12 @@
         public int Rows { get; }
         public int Columns { get; }
         public virtual int Size => Rows * Columns;
-        
+
         // The actual grid
         protected List<List<Cell>> _grid;
 
         public Cell ActiveCell { get; set; }
-        Icon character;
+        int CELLSIZE, WIDTH, HEIGHT;
         Point CharacterPosition;
         Cell CurrentPosition;
         [CanBeNull]
@@ -159,7 +159,9 @@
         public virtual Image ToImg(int cellSize = 50, float insetPrc = 0.0f)
         {
             var width = cellSize * Columns;
+            WIDTH = width;
             var height = cellSize * Rows;
+            HEIGHT = height;
             var inset = (int)(cellSize * insetPrc);
 
             var img = new Bitmap(width, height);
@@ -182,10 +184,12 @@
                         var y = cell.Row * cellSize;
                         if (inset > 0)
                         {
+                            CELLSIZE = cellSize;
                             ToImgWithInset(g, cell, mode, cellSize, x, y, inset);
                         }
                         else
                         {
+                            CELLSIZE = cellSize;
                             ToImgWithoutInset(g, cell, mode, cellSize, x, y);
                         }
                     }
@@ -199,25 +203,23 @@
         protected virtual void ToImgWithInset(Graphics g, CartesianCell cell, DrawMode mode, int cellSize, int x, int y, int inset)
         {
             var (x1, x2, x3, x4, y1, y2, y3, y4) = CellCoordinatesWithInset(x, y, cellSize, inset);
-            
+
             if (mode == DrawMode.Background)
             {
                 var color = BackgroundColorFor(cell);
+
                 if (color != null)
                 {
                     // fill center
-                    var brush = new SolidBrush(color.GetValueOrDefault());
+                    var brush = new SolidBrush(Color.AliceBlue);
                     g.FillRectangle(brush, x2, y2, cellSize - inset * 2, cellSize - inset * 2);
                     Console.WriteLine("REached");
                     if (cell.IsLinked(cell.North))
                     {
-                        g.FillRectangle(brush, x2, y1, cellSize - 2 * inset, inset);
-                        if (cell.containsBonus(x2) == true)
-                        {
-                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
-                            Point p = new Point(x2, y1);
-                            g.DrawIcon(icon: bonus, p.X, p.Y);
-                        }
+
+                        brush = new SolidBrush(Color.Red);
+                        g.FillRectangle(brush, x2, y2, cellSize - inset * 2, cellSize - inset * 2);
+
 
                     }
                     if (cell.IsLinked(cell.South))
@@ -225,9 +227,8 @@
                         g.FillRectangle(brush, x2, y3, cellSize - 2 * inset, inset);
                         if (cell.containsBonus(y3) == true)
                         {
-                            Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
-                            Point p = new Point(x2, y3);
-                            g.DrawIcon(icon: bonus, x2, y3);
+                            brush = new SolidBrush(Color.Red);
+                            g.FillRectangle(brush, x2, y3, cellSize - 2 * inset, inset);
                         }
                     }
                     if (cell.IsLinked(cell.West))
@@ -320,6 +321,7 @@
 
         private void ToImgWithoutInset(Graphics g, CartesianCell cell, DrawMode mode, int cellSize, int x, int y)
         {
+            CELLSIZE = cellSize;
             var x1 = x;
             var y1 = y;
             var x2 = x1 + cellSize;
@@ -335,16 +337,23 @@
                 var color = BackgroundColorFor(cell);
                 if (color != null)
                 {
-                    
-                    if (cell.containsBonus(y1*vN*x) == true)
+                    if (hasPlayer(x1, y1) == true)
                     {
-                        Icon bonus = Icon.ExtractAssociatedIcon("../../bonus.ico");
-                        Point p = new Point(x1, y1);
-                        g.DrawIcon(icon: bonus, x1, y1);
+                        var brush = new SolidBrush(Color.Green);
+                        g.FillRectangle(brush, x1, y1, cellSize, cellSize);
                     }
                     else
                     {
-                        g.FillRectangle(new SolidBrush(color.GetValueOrDefault()), x1, y1, cellSize, cellSize);
+                        if (cell.containsBonus(y1 * vN * x) == true && hasPlayer(x1, y1) == false)
+                        {
+                            var brush = new SolidBrush(Color.Red);
+                            g.FillRectangle(brush, x1, y1, cellSize, cellSize);
+
+                        }
+                        else
+                        {
+                            g.FillRectangle(new SolidBrush(color.GetValueOrDefault()), x1, y1, cellSize, cellSize);
+                        }
                     }
                 }
             }
@@ -381,6 +390,13 @@
             }
         }
 
+        private bool hasPlayer(int x1, int y1)
+        {
+            if (CharacterPosition == new Point(x1, y1))
+            { return true; }
+            return false;
+        } 
+
         protected virtual void DrawPath(Cell cell, Graphics g, int cellSize)
         {
 
@@ -390,7 +406,6 @@
         {
             return Color.White;
         }
-
 
 
         public List<Cell> Deadends()
@@ -424,9 +439,34 @@
 
         internal void moveCharacter(string v, CartesianCell orginalPostition, CartesianCell newCell)
         {
-            if (v == "North")
+            var img = new Bitmap(WIDTH, HEIGHT);
+            using (var g = Graphics.FromImage(img))
             {
-                CharacterPosition = orginalPostition.North.Location;
+                if (v == "North")
+                {
+                    Console.WriteLine("North");
+                    CharacterPosition = orginalPostition.North.Location;
+                    var brush = new SolidBrush(Color.Green);
+                    g.FillRectangle(brush, CharacterPosition.X, CharacterPosition.Y, CELLSIZE, CELLSIZE);
+                }
+                if (v == "South")
+                {
+                    CharacterPosition = orginalPostition.South.Location;
+                    var brush = new SolidBrush(Color.Green);
+                    g.FillRectangle(brush, CharacterPosition.X, CharacterPosition.Y, CELLSIZE, CELLSIZE);
+                }
+                if (v == "East")
+                {
+                    CharacterPosition = orginalPostition.East.Location;
+                    var brush = new SolidBrush(Color.Green);
+                    g.FillRectangle(brush, CharacterPosition.X, CharacterPosition.Y, CELLSIZE, CELLSIZE);
+                }
+                if (v == "West")
+                {
+                    CharacterPosition = orginalPostition.West.Location;
+                    var brush = new SolidBrush(Color.Green);
+                    g.FillRectangle(brush, CharacterPosition.X, CharacterPosition.Y, CELLSIZE, CELLSIZE);
+                }
             }
         }
 

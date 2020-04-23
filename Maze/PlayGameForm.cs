@@ -405,6 +405,7 @@ namespace Maze
             switch (x)
             {
                 case 'd':
+                    Console.WriteLine("HEY");
                     CartesianCell newCell = orginalPostition.East;
                     if (_grid.isWall(orginalPostition, newCell) != true)
                         _grid.moveCharacter("East",orginalPostition,newCell);

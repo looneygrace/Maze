@@ -1,4 +1,5 @@
 ﻿namespace maze.Core.Cells {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Linq;
@@ -31,5 +32,10 @@
         }
         public virtual bool HorizontalPassage => false;
         public virtual bool VerticalPassage => false;
+
+        internal bool hasPlayer(int x1, int y1)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

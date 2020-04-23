@@ -74,16 +74,13 @@
             seed = x;
             random = new Random(seed);
             x = random.Next(0, 20);
-            Console.WriteLine(x);
             if(x < 5 )
             {
-                Console.WriteLine("hey true");
                 return true;
                 
             }
             else
             {
-                Console.WriteLine("hey false", x);
                 return false;
             }
 
