@@ -24,12 +24,14 @@ namespace Maze
         private string MusicFileName;
         private MediaPlayer sound;
         private Theme theme;
+        CustomTheme ct;
         public Settings()
         {
 
             InitializeComponent();
-
-            MusicFileName = "NA";
+            ct = new CustomTheme();
+            theme = new Theme();
+            theme.updateMusic("NA");
             RedWall.Text = "0";
             BlueWall.Text = "0";
             GreenWall.Text = "0";
@@ -48,6 +50,8 @@ namespace Maze
             myBrush.ImageSource =
                 new BitmapImage(new Uri(background, UriKind.Relative));
             this.Background = myBrush;
+            Back.Opacity = .37;
+            theme.updateBackground(background);
         }
         private void Floor_TextChanged(object sender, EventArgs e)
         {
@@ -77,7 +81,7 @@ namespace Maze
         {
             var Main = new MainWindow();
             //TODO make the setting change universal
-            
+            Save_Settings();
             Main.Show();
             this.Close();
         }
@@ -223,6 +227,7 @@ namespace Maze
                 MusicFileName = "Nothing";
                 sound.Stop();
             }
+            theme.updateMusic(MusicFileName);
             var uri = new Uri(MusicFileName, UriKind.Relative);
             
             sound = new MediaPlayer();
@@ -291,10 +296,18 @@ namespace Maze
             Dungeon.IsChecked = false;
             Custom.IsChecked = true;
             //TODO: Get Values from custom panel
+        }
+        private void Save_Settings()
+        {
+            5.ToString();
+            string filename = "../../settings.txt";
+            string[] lines = { theme.backgroundFileName, theme.musicFileName};
+            System.IO.File.WriteAllLines(filename, lines);
+             
 
         }
 
-        
+
     }
     public partial class Theme
     {
@@ -305,8 +318,16 @@ namespace Maze
         public bool shrub;
         public bool dungeon;
         public string musicFileName;
+        public string backgroundFileName;
         SolidColorBrush w;
         SolidColorBrush f;
+        public Theme()
+        {
+            f = new SolidColorBrush();
+            w = new SolidColorBrush();
+            f.Color = Colors.Black;
+            w.Color = Colors.White;
+        }
         public Theme(SolidColorBrush wall, SolidColorBrush floor, string theme)
         {
             w = wall;
@@ -368,6 +389,10 @@ namespace Maze
         public void updateMusic(string musicFile)
         {
             musicFileName = musicFile;
+        }
+        public void updateBackground(string backfile)
+        {
+            backgroundFileName = backfile;
         }
 
     }
