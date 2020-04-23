@@ -31,78 +31,31 @@ namespace Maze
             InitializeComponent();
             ct = new CustomTheme();
             theme = new Theme();
+            theme.updateMusic("NA");
             RedWall.Text = "0";
             BlueWall.Text = "0";
             GreenWall.Text = "0";
             RedFloor.Text = "0";
             GreenFloor.Text = "0";
             BlueFloor.Text = "0";
+            MusicFileName = "Nothing";
             sound = new MediaPlayer();
-            customSettings();
+            
             //sound.PlayLooping();
         }
         //custom colors
-        private void customSettings()
+        private void updateBackground(string background)
         {
-            string[] lines = System.IO.File.ReadAllLines("../../Settings.txt");
-
-            theme.updateMusic(lines[1]);
-            if (lines[0] == "../../CustomSettings.txt")
-            {
-                //custom = true;
-                string[] customlines = System.IO.File.ReadAllLines("../../CustomSettings.txt");
-                RedWall.Text = customlines[0];
-                BlueWall.Text = customlines[1];
-                GreenWall.Text = customlines[2];
-                RedFloor.Text = customlines[3];
-                BlueWall.Text = customlines[4];
-                GreenFloor.Text = customlines[5];
-                Console.Write("CUSTOM");
-                SolidColorBrush FloorColor = new SolidColorBrush();
-                SolidColorBrush WallColor = new SolidColorBrush();
-                WallColor.Color = Color.FromRgb(Convert.ToByte(customlines[0]), Convert.ToByte(customlines[2]), Convert.ToByte(customlines[3]));
-                FloorColor.Color = Color.FromRgb(Convert.ToByte(customlines[3]), Convert.ToByte(customlines[5]), Convert.ToByte(customlines[4]));
-
-                this.Background = WallColor;
-                fl.Fill = FloorColor;
-
-            }
-            else
-            {
-                ImageBrush myBrush = new ImageBrush();
-                myBrush.ImageSource =
-                    new BitmapImage(new Uri(lines[0], UriKind.Relative));
-                this.Background = myBrush;
-                fl.Opacity = .37;
-                theme.updateBackground(lines[0]);
-            }
-
-            var uri = new Uri(lines[1], UriKind.Relative);
-
-            sound = new MediaPlayer();
-
-            sound.Open(uri);
-
-            sound.Play();
-            SystemSounds.Beep.Play();
-            Console.WriteLine(MusicFileName);
-        }
-
-
-        private void updateBack(string background)
-        {if (background != "../../customSettings.txt")
-            {
-                ImageBrush myBrush = new ImageBrush();
-                myBrush.ImageSource =
-                    new BitmapImage(new Uri(background, UriKind.Relative));
-                this.Background = myBrush;
-                fl.Opacity = .37;
-                theme.updateBackground(background);
-            }
-            
+            ImageBrush myBrush = new ImageBrush();
+            myBrush.ImageSource =
+                new BitmapImage(new Uri(background, UriKind.Relative));
+            this.Background = myBrush;
+            Back.Opacity = .37;
+            theme.updateBackground(background);
         }
         private void Floor_TextChanged(object sender, EventArgs e)
         {
+
             RedFloor.Text = valueCheck(RedFloor.Text);
             GreenFloor.Text = valueCheck(GreenFloor.Text);
             BlueFloor.Text = valueCheck(BlueFloor.Text);
@@ -110,11 +63,6 @@ namespace Maze
             SolidColorBrush f = new SolidColorBrush();
             f.Color = Color.FromRgb(Convert.ToByte(RedFloor.Text), Convert.ToByte(BlueFloor.Text), Convert.ToByte(GreenFloor.Text));
             FloorColor.Fill = f;
-            if (Custom.IsChecked == true)
-            {
-                this.Background = WallColor.Fill;
-                fl.Fill = f;
-            }
         }
 
         private void Wall_TextChanged(object sender, EventArgs e)
@@ -127,11 +75,6 @@ namespace Maze
             w.Color = Color.FromRgb(Convert.ToByte(RedWall.Text), Convert.ToByte(BlueWall.Text), Convert.ToByte(GreenWall.Text));
 
             WallColor.Fill = w;
-            if (Custom.IsChecked == true)
-            {
-                this.Background = w;
-                fl.Fill = WallColor.Fill;
-            }
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -139,7 +82,6 @@ namespace Maze
             var Main = new MainWindow();
             //TODO make the setting change universal
             Save_Settings();
-            sound.Stop();
             Main.Show();
             this.Close();
         }
@@ -194,10 +136,6 @@ namespace Maze
  //Music       
         private void NoMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if (sound != null)
-            {
-                sound.Stop();
-            }
             CreepyMusic.IsChecked = false;
             GardenMusic.IsChecked = false;
             SpaceMusic.IsChecked = false;
@@ -206,7 +144,7 @@ namespace Maze
 
         private void CreepyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if (sound != null)
+            if(NoMusic.IsChecked != true)
             {
                 sound.Stop();
             }
@@ -220,7 +158,10 @@ namespace Maze
 
         private void GardenMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            sound.Stop();
+            if (NoMusic.IsChecked != true)
+            {
+                sound.Stop();
+            }
             CreepyMusic.IsChecked = false;
             NoMusic.IsChecked = false;
             GardenMusic.IsChecked = true;
@@ -232,7 +173,7 @@ namespace Maze
 
         private void HappyMusic_Uncheck(object sender, RoutedEventArgs e)
         {
-            if (sound != null)
+            if (NoMusic.IsChecked != true)
             {
                 sound.Stop();
             }
@@ -246,7 +187,7 @@ namespace Maze
 
         private void SpaceMusic_UnCheck(object sender, RoutedEventArgs e)
         {
-            if (sound != null)
+            if (NoMusic.IsChecked != true)
             {
                 sound.Stop();
             }
@@ -314,7 +255,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
-            updateBack("../../brick.jpg");
+            updateBackground("../../brick.jpg");
         }
 
         private void ShrubTheme_Checked(object sender, RoutedEventArgs e)
@@ -324,7 +265,7 @@ namespace Maze
             Shrub.IsChecked = true;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
-            updateBack("../../shrub.jpg");
+            updateBackground("../../shrub.jpg");
         }
 
         private void DungeonTheme_Checked(object sender, RoutedEventArgs e)
@@ -334,7 +275,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = true;
             Custom.IsChecked = false;
-            updateBack("../../dungeon.jpg");
+            updateBackground("../../dungeon.jpg");
         }
 
         private void StoneTheme_Checked(object sender, RoutedEventArgs e)
@@ -344,7 +285,7 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = false;
-            updateBack("../../stone.jpg");
+            updateBackground("../../stone.jpg");
         }
 
         private void CustomTheme_Checked(object sender, RoutedEventArgs e)
@@ -354,20 +295,15 @@ namespace Maze
             Shrub.IsChecked = false;
             Dungeon.IsChecked = false;
             Custom.IsChecked = true;
-            updateBack("../../customSettings.txt");
-            theme.backgroundFileName = "../../customSettings.txt";
+            //TODO: Get Values from custom panel
         }
         private void Save_Settings()
         {
+            5.ToString();
             string filename = "../../settings.txt";
-            string[] lines = { theme.backgroundFileName, theme.musicFileName };
+            string[] lines = { theme.backgroundFileName, theme.musicFileName};
             System.IO.File.WriteAllLines(filename, lines);
-            if (Custom.IsChecked == true)
-            {
-                string customfilename = "../../customsettings.txt";
-                string[] customlines = { RedWall.Text, BlueWall.Text, GreenWall.Text, RedFloor.Text, BlueFloor.Text, GreenFloor.Text };
-                System.IO.File.WriteAllLines(customfilename, lines);
-            }
+             
 
         }
 

@@ -1,2 +1,2 @@
-../../brick.jpg
-../../../music/GardenMusic.mp3
+../../dungeon.jpg
+NA
