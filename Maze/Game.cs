@@ -63,7 +63,7 @@ namespace Maze
                 makeOldMaze();
             }
         }
-        private void makeNewMaze(PictureBox x)
+        private void makeNewMaze()
         {
             //_grid = new Grid(MazeSize, MazeSize);
         }

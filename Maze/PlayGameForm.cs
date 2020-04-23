@@ -48,11 +48,27 @@ namespace Maze
             _grid = new Grid(MazeSize, MazeSize);
             pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
             nudRNGSeed = new Random();
-            
+
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
             pbMask.Image = null;
-
+            cbAlgorithm.SelectedItem = cbAlgorithm.Items[0];
+            if (cbAlgorithm.SelectedItem != null)
+            {
+                Image img;
+                var grid = new Grid(MazeSize, MazeSize);
+                if (pbMask.Image != null)
+                {
+                    var mask = Mask.FromBitmap((Bitmap)pbMask.Image);
+                    grid = new MaskedGrid(mask);
+                }
+                if (!CreateSelectedMaze(grid))
+                {
+                    return;
+                }
+                img = grid.ToImg(GridSize, (float)nudInset);
+                pbMaze.Image = img;
+            }
         }
 
         private void TsmiPickEndOnClick(object sender, EventArgs eventArgs)
