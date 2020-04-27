@@ -152,7 +152,7 @@
 
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-The goal of our project is to create a maze game using WPF applications and databases. We are planning for our game to be able to randomly cycle through at least five pregenerated mazes. Our target audience is gamers who enjoy solving puzzles and are looking for a short, fun diversion. Currently, we are still researching and planning out how to implement our project design.
+The goal of our project is to create a maze game using WPF applications. We are planning for our game to be able to randomly cycle through at least five pregenerated mazes. Our target audience is gamers who enjoy solving puzzles and are looking for a short, fun diversion. 
 \end{abstract}
 
 }
@@ -172,23 +172,23 @@ The goal of our project is to create a maze game using WPF applications and data
 \section{Introduction}
 
 
-For Maze, we are trying to accomplish a interactive WPF application that involves databases and computer generated mazes. We are using Eller's Algorithm to create the mazes due to its ability ro create infinite sized mazes very quickly. The mass of mazes will be stored as a 2d array in a database. The maze will be seen in an isometric view where the viewer will only be able to see a portion and the screen will move with the player. 
+For \textit{Maze}, we accomplished an interactive WPF application that involves computer generated mazes. We are using a Binary Algorithm to create the mazes due to its ability to create infinite sized mazes very quickly. The maze will be seen in an isometric view where the viewer will only be able to see a portion and the screen will move with the player. 
 
-Maze is intended for people who enjoy puzzle games. It offers a simple distraction to the constant boredom most humans suffer from.  We hope our audience will achieve a sense of fullfiillment out of our game because they solved a maze or multiple mazes. 
+Maze is intended for people who enjoy puzzle games. It offers a simple distraction to the constant boredom most humans suffer from.  We hope our audience will achieve a sense of fulfillment out of our game because they solved a maze or multiple mazes. 
 
 \subsection{Background}
-We want to our maze to be 'perfect' and  'orthogonal' \cite{Pullen}. A 'perfect' maze means that the maze lacks loops and closed cricuits. So the maze does not have any unreachable areas. In addition, 'perfect' implies that there is exactly one path. There are multiple ways to do this. For example, The best way to achieve this is to use to achieve an 'perfect' 'orthogonal' maze is to use Eller's Algorithm. Eller's Algorithm is incredibly fast and very memory efficient because it only requires storage proportional to only a single row. So in the future, we aim to get the application to make simple mazes on user-demand. 
+We want to our maze to be 'perfect' and  'orthogonal' \cite{Pullen}. A 'perfect' maze means that the maze lacks loops and closed circuits. So the maze does not have any unreachable areas. In addition, 'perfect' implies that there is exactly one path. There are multiple ways to do this. For example, one of the easiest ways to achieve a perfect orthogonal algorithm is to a Binary Tree algorithm.  Although the Binary Tree algorithm is simple and fast, there is one con it is very biased due how it  creates the maze. Each cell carves the next cell by randomly choosing a cell that is either two directions which causes the product to have passages that lead diagonally from upper left to lower right. We overlooked this downside because of the ease of implementation.
 
-We decided to do this project because it allows us to use databases and algorithms. Algorithms hold a special place in our hearts. They offer a way to implement something amazing efficiently. On the otherhand, databases are something new that we have learned in CSCI 352.
+We wanted to do this project because of the implementation of an algorithm that we learned in CSCI 325. In addition, this application allows us to gain an understanding of how game applications work.
 
 
 \subsection{Challenges}
-We will most likely get stuck in implementing a database, Eller's algorithm, and the isometric view. We are both neophytes concerning databases, and we need to find a way so that we limit the amount of space that an array takes up. Eller's Algorithm requires implementers to understand sets and inner-relations of sets to arrays. The isometric view will require us to understand 3D graphics which none of us have experience in. 
-
+There were many challenges to this project. With the CONVID-19 outbreak, we lost the ease of the communication which was the first step of our mighty downfall. There were multiple challenges: implementing a way to view the maze, player movement, and the settings menu. The biggest challenge implementing a way to view the maze, because the algorithm only returns whether the cell is linked. Although we never accomplished the player movement. The Settings menu's challenges were diverse because we had to understand how to pass on the settings values that the user selected to other pages.
 
 \section{Scope}
-Our project is done when we have a 'perfect' 'orthogonal' maze application with a view. It will be a functional application that calls on a database holding minimum of five mazes and be able to call on them at random. In addition, the user will be able to view a menu with buttons that'll allow it to randomly select a maze and format it to be viewed isometricly. 
+Our project is done when we have a 'perfect' 'orthogonal' maze application with a top-down view. In addition, the user will be able to view a menu with buttons that'll allow them to make binary tree maze and format it to be viewed top-down. 
 \subsection{Stretch Goals:}
+We completed 1 out 4 of our stretch goals.  The timer is half-way implemented. It shows a timer but when the user pauses the maze it does not stop the timer. We did not complete the \textit{scored} stretch goal, because of the timer issue and the inability to gather points. We minimally completed the \textit{music} stretch goal. The music does not continuously play, but it does restart every time the user opens a new window. The \textit{secret buttons} implementation was not attempted.
 \begin{itemize}
 \item Timed: The user can see how long it took them to complete that maze.
 \item Scored: The user can earn points by collecting items across the maze.
@@ -199,29 +199,28 @@ Our project is done when we have a 'perfect' 'orthogonal' maze application with 
 
 
 \subsection{Requirements}
-As part of fleshing out the scope of your requirements, you'll also need to keep in mind both your functional and non-functional requirements.  These should be listed, and explained in detail as necessary.  Use this area to explain how you gathered these requirements.
-
+For our requirements, we met a portion of them. We were able to complete all of the nonfunctional requirements. The application uses the binary tree algorithm to create a maze within one second on worst case scenario \ref{item:NF2}. For the \textit{scalability} \ref{item:NF1}, there is a global maze variable that a power user can adjust when they want a bigger or smaller maze. The functional requirements that we met are \ref{itm:F1},\ref{itm:F2},\ref{itm:F3}, and\ref{itm:F4}. The functional requirements that we did not meet: \ref{itm:F5}, \ref{itm:F6}, and \ref{itm:F7}. 
 \subsubsection{Functional}
-\begin{itemize}
-\item User needs to be able to interact with the maze
-\item Application needs to be able to save 3 games
-\item Application needs to be able to load any of the three saved games
-\item Application will record high scores
-\end{itemize}
+\begin{enumerate}
+\item User needs to be able to view the GUI\label{itm:F1} 
+\item User needs to be able to interact with the GUI\label{itm:F2} 
+\item User needs to view the maze\label{itm:F3} 
+\item User needs to be able to interact with the maze\label{itm:F4} 
+\item Application needs to be able to save 3 games\label{itm:F5} 
+\item Application needs to be able to load any of the three saved games \label{itm:F6}
+\item Application will record high scores \label{itm:F7}
+\end{enumerate}
 
 \subsubsection{Non-Functional}
 \begin{itemize}
-\item Perfomance- Application will create mazes in a short amount of time
-\item Scalability - Application will create mazes of differnent sizes
+\item Performance- Application will create mazes in a short amount of time\label{item:NF2} 
+\item Scalability - Application will create mazes of different sizes\label{item:NF1}
 \end{itemize}
 
 \subsection{Use Cases}
-This subsection is arguably part of how you define your project scope (why it is in the Scope section...).  In a traditional Waterfall approach, as part of your requirements gathering phase (what does the product actually \emph{need} to do?), you will typically sit down with a user to develop use cases.
-
-You should have a table listing all use cases discussed in the document, the ID is just the order it is listed in, the name should be indicative of what should happen, the primary actor is typically most important in an application where you may have different levels of users (think admin vs normal user), complexity is a best-guess on your part as to how hard it should be.  A lower number in priority indicates that it needs to happen sooner rather than later.  A sample table, or Use Case Index can be seen in Table \ref{tab:useCaseIndex}.
 
 
-
+We have seven use cases. \ref{UC:StartNewGame} is medium complexity because all this case required was transferring of the data values: size, settings choices. In addition, it needed to show a game screen after the \textit{New Game} button was clicked. \ref{UC:Customize} is medium complexity and $2_{nd}$ priority because it only requires an small understanding of how GUI works and how to transfer values from one page to the next. In addition, Customize does not impede any other use case, so this is why it has a low priority. \ref{UC:Save} is medium complexity and low priority because it's implementation only effects \ref{UC:Load} because Load calls upon the data that \ref{UC:Save} saved. \ref{UC:Scores} is low priority and medium difficulty because it does not affect any other use case. \ref{UC:Play} is high priority and very complex. Playing the game is the sole purpose of this project so its complexity and priority demonstrate this. \ref{UC:Credits} is listed as an easy task and low priority because it does not impede any other use case and its just an information window. 
 
 \begin{table}
 \centering
@@ -229,13 +228,13 @@ You should have a table listing all use cases discussed in the document, the ID 
 \hline
 Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \hline \hline
-1 & Start New Game & Gamer & Med & 1\\
-2 & Customize Maze & Gamer & Med & 2\\
-3 & Save Game & Gamer & Med & 3\\
-4 & Load Game & Gamer & Med  &3\\
-5 & Calculate High Scores & Computer & Med & 3\\
-6 & Play Game & Gamer & Hard & 1\\
-7 & View Credits & Gamer & Easy & 4\\
+1\label{UC:StartNewGame} & Start New Game & Gamer & Med & 1\\
+2\label{UC:Customize} & Customize Maze & Gamer & Med & 2\\
+3\label{UC:Save} & Save Game & Gamer & Med & 3\\
+4\label{UC:Load} & Load Game & Gamer & Med  &3\\
+5\label{UC:Scores}  & Calculate High Scores & Computer & Med & 3\\
+6\label{UC:Play}  & Play Game & Gamer & Hard & 1\\
+7\label{UC:Credits} & View Credits & Gamer & Easy & 4\\
 \hline
 
 \end{tabular}
@@ -245,16 +244,16 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 
 
 \begin{itemize}
-\item[Use Case Number:] 1
+\item[Use Case Number:] 1\ref{UC:StartNewGame}
 \item[Use Case Name:] Start New Game 
-\item[Description:] The gamer on our WPF application wants to play a new game. They will click the "New Game" Button, and this will start the off the Eller's algorithm to create a new maze. In addition, the maze will display after algorithm is completed. 
-\item[Preconditons:]
+\item[Description:] The gamer on our WPF application wants to play a new game. They will click the "New Game" Button, and this will start the off the Binary Tree algorithm to create a new maze. In addition, the maze will display after algorithm is completed. 
+\item[Pre-conditions:]
 \begin{itemize} 
 \item Maze is downloaded
 \item Maze has been opened
 \end{itemize}
 
-\item[Postconditons:]
+\item[Post-conditions:]
 \begin{itemize} 
 \item New game will be started
 \end{itemize}
@@ -263,9 +262,8 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \item New game function is working properly
 \item Game runs as it is meant to
 \end{itemize}
-\end{itemize}
 
-
+\item[Process:]
 \begin{enumerate}
 \item Select New Game from the main menu
 \item Play game
@@ -274,15 +272,15 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \begin{itemize}
 \item[Use Case Number:] 2
 \item[Use Case Name:] Customize Maze
-\item[Description:] The gamer on our WPF application wants to edit their maze appearence or the sounds of the maze. The gamer clicks the "Settings" button. This will take the gamer to the settings menu, so they can customize the maze appearence.
+\item[Description:] The gamer on our WPF application wants to edit their maze appearance or the sounds of the maze. The gamer clicks the "Settings" button. This will take the gamer to the settings menu, so they can customize the maze appearance.
 
-\item[Preconditons:]
+\item[Pre-conditions:]
 \begin{itemize} 
 \item Maze is downloaded
 \item Maze has been opened
 \end{itemize}
 
-\item[Postconditons:]
+\item[Post-conditions:]
 \begin{itemize} 
 \item Current maze theme will be updated
 \end{itemize}
@@ -295,7 +293,7 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \end{itemize}
 \end{itemize}
 
-
+\item[Process:]
 \begin{enumerate}
 \item Select settings from home screen
 \item If desired theme already exists, then select it from the Theme menu
@@ -304,20 +302,18 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \item Select desired color for maze floor
 \item Select desired music setting from the Music menu
 \item Save maze settings
-
-
 \end{enumerate}
 \begin{itemize}
 \item[Use Case Number:] 3
 \item[Use Case Name:] Save Game
 \item[Description:] The gamer on our WPF application wants to save their unfinished maze. The gamer selects in the "save" button from the game view. They will be able to select one of the save spaces to save their maze to that memory spot.
-\item[Preconditons:]
+\item[Pre-conditions:]
 \begin{itemize} 
 \item Maze is downloaded
 \item Maze has been opened
 \end{itemize}
 
-\item[Postconditons:]
+\item[Post-conditions:]
 \begin{itemize} 
 \item Current game is saved in desired save slot
 \end{itemize}
@@ -326,9 +322,9 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 \item Pause function is working properly
 \item Save function is working properly
 \end{itemize}
+
+\item [Process]
 \end{itemize}
-
-
 \begin{enumerate}
 \item Click pause button
 \item Click save button
@@ -339,15 +335,15 @@ Use Case ID & Use Case Name & Primary Actor & Complexity & Priority \\
 
 \end{enumerate}
 
-You will then need to continue to flesh out all use cases you have identified for your project.
-
+\end{itemize}
 \subsection{Interface Mockups}
 
 \begin{figure}[ht!]
 \includegraphics[height=150px, width=250px]{interface/Interface-Menu.png}
-\caption{This is the Menu}
+\caption{This is the Menu, There are}
 \label{Menu}
 \end{figure}
+
 \begin{figure}[ht!]
 \includegraphics[height=150px, width=250px]{interface/Interface-BeginMaze.png}
 \caption{This is the screen where the "New Button" transports the user}
@@ -433,14 +429,14 @@ Purpose & 1/21/2020 & 1/15/2020 & Both members agree upon the purpose of the pro
 Features & 1/21/2020 & 1/15/2020 & Both members agree upon an what features to include& 1\\
 Use Cases & 2/11/2020 & 1/15/2020 & The use cases are listed in the latex file & 1\\
 Non-functional and functional & 2/11/2020 & 1/15/2020 & The requirements are listed in the latex file & 2\\
-Interface Mockup & 2/11/2020 & 2/21/2020 & The mockup slides are added to the Latex file & 2\\
+Interface Mockup & 2/11/2020 & 2/21/2020 & The mock-up slides are added to the Latex file & 2\\
 \hline \hline
 Design: \\
 \hline \hline 
 Timeline & 2/26/2020 & 2/27/2020 & The timeline is added to the latex file & 2\\
 UML Outline & 2/28/2020 & 3/31/2020 & The outline is added to the latex file & 2\\
 Researched Design Patterns& 2/27/2020& 3/31/2020 & The team reasearches possible design patterns to implement & 3\\
-Researched Implementation Ideas & 2/29/2020& 3/31/2020 & The team reasearches possible ways to implement project & 3\\
+Researched Implementation Ideas & 2/29/2020& 3/31/2020 & The team researches possible ways to implement project & 3\\
 Updated Latex File& 3/31/2020 & 3/31/2020 & The team updates the Latex file with the changes&2\\
 \hline \hline
 Implementation: \\
@@ -462,34 +458,33 @@ Preparation for Presentation & 4/20/2020&4/20/2020& Prepare&1\\
 \end{table}
 \clearpage
 \section{Project Structure}
-At first, this will be a little empty (it will need to be filled in by the time you turn in your final report).  This is your chance to discuss all of your design decisions (consider this the README's big brother).
-
 \subsection{UML Outline}
 \begin{figure}[ht!]
-\includegraphics[scale=.5]{patterns/Observer.png}
+\includegraphics[scale=.5]{Observer.png}
 \caption{How we will update the GUI}
 \label{Game play}
 \end{figure}
+We chose the observer pattern because it allows us to customize the maze immediately on change.
 \begin{figure}[ht!]
-\includegraphics[scale=.5]{patterns/Singleton.png}
+\includegraphics[scale=.5]{Singleton.png}
 \caption{How we will handle the three instances of the maze}
 \label{Maze instance}
 \end{figure}
+We chose the Singleton pattern to control the number of instances of the maze.
 \clearpage
 \subsection{Design Patterns Used}
 \begin{enumerate}
 \item Singleton
-\item Factory
+\item Observer
 \end{enumerate}
 
 
 \section{Results}
+The result of our project is sad. We barely accomplished half of the work. We were unable to meet the minimum requirements. In summary, we have a half implemented maze game
 This section will start out a little vague, but it should grow as your project evolves.  With each deliverable you hand in, give me a final summary of where your project stands.  By the end, this should be a reflective section discussing how many of your original goals you managed to attain/how many desired use cases you implemented/how many extra features you added.
 
 \subsection{Future Work}
-Where are you going next with your project?
-For early deliverables, what are your next steps?  (HINT: you will typically want to look back at your timeline and evaluate: did you meet your expected goals?  Are you ahead of schedule?  Did you decide to shift gears and implement a new feature?)
-By the end, what do you plan on doing with this project?  Will you try to sell it?  Set it on fire?  Link to it on your resume and forget it exists?
+Future work, we will delete all copies of the game, and forget this catastrophe ever existed. In addition, this partnership will never happen again.
 
 
 

@@ -67,7 +67,7 @@ namespace Maze
                 myBrush.ImageSource =
                     new BitmapImage(new Uri(lines[0], UriKind.Relative));
                 this.Background = myBrush;
-                fl.Opacity = .37;
+                fl.Opacity = .75;
             }
             var uri = new Uri(lines[1], UriKind.Relative);
 

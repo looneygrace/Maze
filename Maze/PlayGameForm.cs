@@ -33,7 +33,7 @@ namespace Maze
     public partial class MazeForm : Form
     {
         private int GridSize = 50;
-        private const int MazeSize = 11;
+        private int MazeSize = 75;
         private Grid _grid;
         private IMazeAlgorithm _algorithm;
         private Point? _tempPoint;
@@ -44,7 +44,7 @@ namespace Maze
         private MazeStyle _mode;
         CartesianCell originalPosition;
 
-        public MazeForm()
+        public MazeForm(int mazeSize)
         {
             InitializeComponent();
             
@@ -52,7 +52,7 @@ namespace Maze
             _grid = new Grid(MazeSize, MazeSize);
             pbMaze.Image = _grid.ToImg(GridSize, (float)nudInset);
             nudRNGSeed = new Random();
-            
+            MazeSize = mazeSize;
             tsmiPickStart.Click += TsmiPickStartOnClick;
             tsmiPickEnd.Click += TsmiPickEndOnClick;
             pbMask.Image = null;
@@ -139,7 +139,7 @@ namespace Maze
             }
             if (pbMask.Image != null && (type == typeof(BinaryTree)))
             {
-                MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
+                MessageBox.Show("Cannot use masks with BinaryTree algorithms");
             }
             int rand = nudRNGSeed.Next();
             type.GetMethod("Maze", new[] { typeof(Grid), typeof(int) }).Invoke(null, new object[] { grid, rand});
@@ -182,7 +182,6 @@ namespace Maze
             }
             if (pbMask.Image != null && type == typeof(BinaryTree))
             {
-                MessageBox.Show("Cannot use masks with Sidewinder and BinaryTree algorithms");
             }
             int rand = nudRNGSeed.Next();
 

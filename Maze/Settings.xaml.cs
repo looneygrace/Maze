@@ -368,7 +368,7 @@ namespace Maze
             Dungeon.IsChecked = false;
             Custom.IsChecked = true; 
             updateBack("../../customSettings.txt");
-
+           
 
 
             theme.backgroundFileName = "../../customSettings.txt";
